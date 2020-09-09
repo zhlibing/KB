@@ -36,10 +36,11 @@
     
     [self.view addSubview:self.mainImgView];
     [self.mainImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(@(ScaleW(52)));
-        make.right.equalTo(@(ScaleW(-52)));
-        make.centerY.equalTo(self.view.mas_centerY).offset(ScaleW(-20));
-        make.height.equalTo(@(ScaleW(360)));
+        make.top.equalTo(@(ScaleW(80)));
+        make.left.equalTo(@(ScaleW(30)));
+        make.right.equalTo(@(ScaleW(-30)));
+        make.bottom.equalTo(@(ScaleW(-80)));
+        make.centerY.equalTo(self.view.mas_centerY);
         
     }];
     

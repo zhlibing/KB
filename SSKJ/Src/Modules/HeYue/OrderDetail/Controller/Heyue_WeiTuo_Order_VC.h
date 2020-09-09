@@ -13,11 +13,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Heyue_WeiTuo_Order_VC : SSKJ_BaseViewController
 
-//@property (nonatomic,strong) SSKJ_Market_Index_Model *model;//行情model
+#pragma mark 关闭定时器
 
-- (void)openTimer;
+/// 关闭定时器
+-(void)stopRuntimer;
 
-- (void)closetimer;
+#pragma mark 开启定时器
+/// 开启定时器
+-(void)startRuntimer;
+
 
 @end
 

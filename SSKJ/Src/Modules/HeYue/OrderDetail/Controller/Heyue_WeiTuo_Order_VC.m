@@ -15,6 +15,7 @@
 #import "Heyue_OrderDdetail_Model.h"
 #import "Heyue_AllPingCang_AlertView.h"
 #import "SSKJ_NoDataView.h"
+#import "LJWeakProxy.h"
 #define kPageSize @"50"
 
 static NSString *WeiTuoOrderID = @"WeiTuoOrderID";
@@ -61,33 +62,42 @@ static NSString *WeiTuoOrderID = @"WeiTuoOrderID";
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self openTimer];
+    [self startRuntimer];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [self closetimer];
+    [self stopRuntimer];
 }
 
-- (void)openTimer{
-    if (!self.timer) {
-        _timer = [NSTimer scheduledTimerWithTimeInterval:1.f target:self selector:@selector(reloadTimer) userInfo:nil repeats:YES];
-    }
+
+
+#pragma mark 开启定时器
+-(void)startRuntimer
+{
+    [self stopRuntimer];
+    // 这里的target又发生了变化
+    self.timer = [NSTimer timerWithTimeInterval:2.0 target:[LJWeakProxy proxyWithTarget:self] selector:@selector(reloadTimer) userInfo:nil repeats:YES];
+    [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];
+    [self.timer fire];
 }
 
-- (void)closetimer{
-    
-    if (!self.timer) {
-        return;
-    }
-    
+
+#pragma mark 关闭定时器
+-(void)stopRuntimer
+{
     [self.timer invalidate];
     self.timer = nil;
-    
 }
 
 
-- (SSKJ_TableView *)tableView{
+
+
+
+
+
+- (SSKJ_TableView *)tableView
+{
     if (_tableView == nil)
     {
         _tableView = [[SSKJ_TableView alloc]initWitDeletage:self];
@@ -117,11 +127,22 @@ static NSString *WeiTuoOrderID = @"WeiTuoOrderID";
     [self requestWeiTuoOrder_URL];
     
 }
-- (void)reloadTimer{
-    self.index++;
-    self.page = 1;
-    
-    [self requestWeiTuoOrder_URL];
+
+- (void)reloadTimer
+{
+    if (kLogin)
+    {
+        self.index++;
+        self.page = 1;
+        [self requestWeiTuoOrder_URL];
+        NSLog(@"定时器获取委托数据");
+    }
+    else
+    {
+        [self stopRuntimer];
+    }
+
+      NSLog(@"定时器开始获委托");
 
 }
 

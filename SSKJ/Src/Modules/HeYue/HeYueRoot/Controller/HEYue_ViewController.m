@@ -95,7 +95,7 @@ static NSString * NodataCellID = @"NodataCell";
 @property (nonatomic,strong) ManagerSocket * shenDuSocket;//币种深度
 
 
-@property(nonatomic, strong)Heyue_root_OrderSectionView *sectionView;
+@property(nonatomic, strong) Heyue_root_OrderSectionView *sectionView;
 @end
 
 @implementation HEYue_ViewController

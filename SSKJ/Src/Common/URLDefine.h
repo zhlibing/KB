@@ -36,11 +36,11 @@
 
 
 
-#define ProductBaseServer  @"https://okoex.vip"
+#define ProductBaseServer  @"https://kbcoin.top"
 
 #define ImageBaseServer  @"http://atex001.oss-cn-hongkong.aliyuncs.com"
 
-#define MarketSocketUrl @"wss://okoex.vip/ws"
+#define MarketSocketUrl @"wss://kbcoin.top/ws"
 
 
 

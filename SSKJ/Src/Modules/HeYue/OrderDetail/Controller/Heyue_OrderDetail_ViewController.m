@@ -18,6 +18,8 @@
 #import "Heyue_CengJiao_Order_VC.h"
 
 #import "Heyue_OrderInfo_Model.h"
+#import "LJWeakProxy.h"
+
 
 @interface Heyue_OrderDetail_ViewController ()<UIScrollViewDelegate>
 
@@ -37,18 +39,14 @@
 
 @implementation Heyue_OrderDetail_ViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
     self.title = SSKJLocalized(@"订单明细", nil);
     self.view.backgroundColor = kBgColor;
     [self.navigationItem setTitleView:self.segmentControl];
     [self.view addSubview:self.headerView];
     [self.view addSubview:self.scrollView];
-    
-    
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:5.f target:self selector:@selector(timerRefreash:) userInfo:nil repeats:YES];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -57,22 +55,54 @@
 
 }
 
--(void)timerRefreash:(NSTimer *)timer{
-    [self request_Tongji_URL];
-}
+
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-
-    [self request_Tongji_URL];
+    [self startRuntimer];
 }
 
--(void)viewDidDisappear:(BOOL)animated{
+-(void)viewDidDisappear:(BOOL)animated
+{
     [super viewDidDisappear:animated];
-    [_timer invalidate];
-    _timer = nil;
+    [self stopRuntimer];
 }
 
+
+#pragma mark 开启定时器
+-(void)startRuntimer
+{
+    [self stopRuntimer];
+    // 这里的target又发生了变化
+    self.timer = [NSTimer timerWithTimeInterval:5.0 target:[LJWeakProxy proxyWithTarget:self] selector:@selector(timerRefreash:) userInfo:nil repeats:YES];
+    [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];
+    [self.timer fire];
+}
+
+
+#pragma mark 关闭定时器
+-(void)stopRuntimer
+{
+    [self.timer invalidate];
+    self.timer = nil;
+}
+
+
+-(void)timerRefreash:(NSTimer *)timer
+{
+    if (kLogin)
+    {
+        [self request_Tongji_URL];
+        NSLog(@"定时器获取浮动盈亏");
+    }
+    else
+    {
+        [self stopRuntimer];
+    }
+}
+
+
+#pragma mark - Getter / Setter
 - (Heyue_orderDetail_headerView *)headerView
 {
     if (_headerView == nil)
@@ -89,24 +119,20 @@
     switch (currentPage) {
         case 0:
         {
-            [self.chicangVC openTimer];
-
-            [self.weituoVC closetimer];
+            [self.chicangVC startRuntimer];
+            [self.weituoVC stopRuntimer];
         }
             break;
         case 1:
         {
-            [self.weituoVC openTimer];
-            
-            [self.chicangVC closetimer];
+            [self.weituoVC startRuntimer];
+            [self.chicangVC stopRuntimer];
         }
             break;
         case 2:
         {
-            [self.chicangVC closetimer];
-            
-            [self.weituoVC closetimer];
-            
+            [self.chicangVC stopRuntimer];
+            [self.weituoVC stopRuntimer];
             [self.chengjiaoVC beginrefreashData];
         }
             break;
@@ -217,24 +243,20 @@
     switch (index) {
         case 0:
         {
-            [self.chicangVC openTimer];
-
-            [self.weituoVC closetimer];
+            [self.chicangVC startRuntimer];
+            [self.weituoVC stopRuntimer];
         }
             break;
         case 1:
         {
-            [self.weituoVC openTimer];
-            
-            [self.chicangVC closetimer];
+            [self.weituoVC startRuntimer];
+            [self.chicangVC stopRuntimer];
         }
             break;
         case 2:
         {
-            [self.chicangVC closetimer];
-            
-            [self.weituoVC closetimer];
-            
+            [self.chicangVC stopRuntimer];
+            [self.weituoVC stopRuntimer];
             [self.chengjiaoVC beginrefreashData];
         }
             break;

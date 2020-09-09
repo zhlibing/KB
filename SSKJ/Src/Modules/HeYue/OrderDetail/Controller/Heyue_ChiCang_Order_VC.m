@@ -26,6 +26,10 @@
 
 #import "Heyue_Leverage_Model.h"
 
+#import "LJWeakProxy.h"
+
+
+
 static NSString *ChiCangOrderID = @"ChiCangOrderID";
 
 #define kPageSize @"50"
@@ -101,12 +105,13 @@ static NSString *ChiCangOrderID = @"ChiCangOrderID";
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     //开启推送
-//    [self openSocket];
-    [self openTimer];
+    [self startRuntimer];
 }
+
 #pragma mark -- Socket --
 //打开推送
-- (void)openSocket{
+- (void)openSocket
+{
     WS(weakSelf);
     
     //成交
@@ -119,30 +124,43 @@ static NSString *ChiCangOrderID = @"ChiCangOrderID";
         [weakSelf.coinSocket socketSendMsg:type];
     }];
 }
-- (void)viewWillDisappear:(BOOL)animated{
+- (void)viewWillDisappear:(BOOL)animated
+{
     [super viewWillDisappear:animated];
-    [self closetimer];
-//    [self closeSocket];
+    [self stopRuntimer];
 }
+
+
+
 //关闭推送
 - (void)closeSocket{
     self.coinSocket.delegate = nil;
     [self.coinSocket closeConnectSocket];
     
 }
-- (void)openTimer{
-    if (!self.timer) {
-        _timer = [NSTimer scheduledTimerWithTimeInterval:5.f target:self selector:@selector(reloadTimer) userInfo:nil repeats:YES];
-    }
+
+
+#pragma mark 开启定时器
+-(void)startRuntimer
+{
+    [self stopRuntimer];
+    // 这里的target又发生了变化
+    self.timer = [NSTimer timerWithTimeInterval:2.0 target:[LJWeakProxy proxyWithTarget:self] selector:@selector(reloadTimer) userInfo:nil repeats:YES];
+    [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];
+    [self.timer fire];
 }
 
-- (void)closetimer{
-    if (!self.timer) {
-        return;
-    }
+
+#pragma mark 关闭定时器
+-(void)stopRuntimer
+{
     [self.timer invalidate];
     self.timer = nil;
 }
+
+
+
+
 #pragma mark - 推送返回的数据
 //接收推送数据
 -(void)socketDidReciveData:(id)data identifier:(NSString *)identifier{
@@ -222,9 +240,6 @@ static NSString *ChiCangOrderID = @"ChiCangOrderID";
         }];
         _tableView.mj_header = [MJRefreshStateHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
         
-//        _tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-//            [weakSelf footerRefresh];
-//        }];
     }
     return _tableView;
 }
@@ -238,10 +253,18 @@ static NSString *ChiCangOrderID = @"ChiCangOrderID";
     [self requestChiCangOrder_URL];
     
 }
-- (void)reloadTimer{
-    self.index++;
-    [self requestChiCangOrder_URL];
-    
+- (void)reloadTimer
+{
+    if (kLogin)
+    {
+        self.index++;
+        [self requestChiCangOrder_URL];
+        NSLog(@"定时器获取持仓数据");
+    }
+    else
+    {
+        [self stopRuntimer];
+    }
 }
 
 //- (void)headerRefreshChiCangOrder_URL{

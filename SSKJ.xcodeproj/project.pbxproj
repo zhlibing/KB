@@ -454,6 +454,7 @@
 		968DAACC24DEEAB40038BF8B /* HomeHeaderItemControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 968DAACB24DEEAB40038BF8B /* HomeHeaderItemControl.m */; };
 		96BA168624DF9D1B0046EF58 /* AssetsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 96BA168524DF9D1B0046EF58 /* AssetsTableViewCell.m */; };
 		96BA168C24DFA4300046EF58 /* AssetsBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 96BA168A24DFA4300046EF58 /* AssetsBtn.m */; };
+		96C0EC412508649100167BFD /* LJWeakProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 96C0EC402508649000167BFD /* LJWeakProxy.m */; };
 		96F790D824E0DF5A00386FDB /* 1242X2208.gif in Resources */ = {isa = PBXBuildFile; fileRef = 96F790D524E0DF5900386FDB /* 1242X2208.gif */; };
 		96F790D924E0DF5A00386FDB /* 750X1334.gif in Resources */ = {isa = PBXBuildFile; fileRef = 96F790D624E0DF5900386FDB /* 750X1334.gif */; };
 		96F790DA24E0DF5A00386FDB /* 1242X2688.gif in Resources */ = {isa = PBXBuildFile; fileRef = 96F790D724E0DF5A00386FDB /* 1242X2688.gif */; };
@@ -505,7 +506,7 @@
 		044B420D24285F7D002C771E /* NSTimer+weakTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+weakTimer.m"; sourceTree = "<group>"; };
 		0455BDF12425B71A00EBE580 /* Heyue_OrderDetail_ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Heyue_OrderDetail_ViewController.h; sourceTree = "<group>"; };
 		0455BDF22425B71A00EBE580 /* Heyue_OrderDetail_ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Heyue_OrderDetail_ViewController.m; sourceTree = "<group>"; };
-		06304A9121B907FB00279355 /* OKOEX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OKOEX.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		06304A9121B907FB00279355 /* KB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		06304A9421B907FB00279355 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		06304A9521B907FB00279355 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		06304A9B21B907FB00279355 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -1398,6 +1399,8 @@
 		96BA168524DF9D1B0046EF58 /* AssetsTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AssetsTableViewCell.m; sourceTree = "<group>"; };
 		96BA168A24DFA4300046EF58 /* AssetsBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssetsBtn.m; sourceTree = "<group>"; };
 		96BA168B24DFA4300046EF58 /* AssetsBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssetsBtn.h; sourceTree = "<group>"; };
+		96C0EC3F2508649000167BFD /* LJWeakProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJWeakProxy.h; sourceTree = "<group>"; };
+		96C0EC402508649000167BFD /* LJWeakProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJWeakProxy.m; sourceTree = "<group>"; };
 		96F790D524E0DF5900386FDB /* 1242X2208.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 1242X2208.gif; sourceTree = "<group>"; };
 		96F790D624E0DF5900386FDB /* 750X1334.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 750X1334.gif; sourceTree = "<group>"; };
 		96F790D724E0DF5A00386FDB /* 1242X2688.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 1242X2688.gif; sourceTree = "<group>"; };
@@ -1530,7 +1533,7 @@
 		06304A9221B907FB00279355 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				06304A9121B907FB00279355 /* OKOEX.app */,
+				06304A9121B907FB00279355 /* KB.app */,
 				06304AA921B907FC00279355 /* SSKJTests.xctest */,
 				06304AB421B907FC00279355 /* SSKJUITests.xctest */,
 			);
@@ -2030,6 +2033,8 @@
 		3A08C001234C5D360086ED0F /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				96C0EC3F2508649000167BFD /* LJWeakProxy.h */,
+				96C0EC402508649000167BFD /* LJWeakProxy.m */,
 				3A08C00B234C5D360086ED0F /* SSKJ_BaseNavigationController.h */,
 				3A08C006234C5D360086ED0F /* SSKJ_BaseNavigationController.m */,
 				3A08C005234C5D360086ED0F /* SSKJ_BaseViewController.h */,
@@ -3622,7 +3627,7 @@
 			);
 			name = SSKJ;
 			productName = SSKJ;
-			productReference = 06304A9121B907FB00279355 /* OKOEX.app */;
+			productReference = 06304A9121B907FB00279355 /* KB.app */;
 			productType = "com.apple.product-type.application";
 		};
 		06304AA821B907FC00279355 /* SSKJTests */ = {
@@ -3844,6 +3849,7 @@
 				963F514924D59B9C00844D73 /* AFURLResponseSerialization.m in Sources */,
 				065BD19B24497CAE00FB4F65 /* BuyCoinRecord_Model.m in Sources */,
 				06FE3EAD2446B2E5005CB814 /* Mine_ChangeLanguage_ViewController.m in Sources */,
+				96C0EC412508649100167BFD /* LJWeakProxy.m in Sources */,
 				4359250B23580E8E0005C1AA /* LXY_Deep_HeaderView.m in Sources */,
 				3A08C1E7234C5D380086ED0F /* SSKJ_H5Web_ViewController.m in Sources */,
 				3A08C2FE234C5D380086ED0F /* WLBaseModel.m in Sources */,
@@ -4365,7 +4371,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6D5Q4H7PDR;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/SSKJ/Src/Common/PrefixHeader.pch";
@@ -4376,8 +4382,8 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.OKOEX.soft;
-				PRODUCT_NAME = OKOEX;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kb.soft;
+				PRODUCT_NAME = KB;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SSKJ/Src/Modules/Assets/资产充值/SSKJ-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -4393,7 +4399,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2VZPDQKTU8;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/SSKJ/Src/Common/PrefixHeader.pch";
@@ -4404,8 +4410,8 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.OKOEX.soft;
-				PRODUCT_NAME = OKOEX;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kb.soft;
+				PRODUCT_NAME = KB;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SSKJ/Src/Modules/Assets/资产充值/SSKJ-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;

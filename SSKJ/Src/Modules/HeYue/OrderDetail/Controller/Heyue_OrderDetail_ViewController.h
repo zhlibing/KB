@@ -14,7 +14,14 @@ NS_ASSUME_NONNULL_BEGIN
 @interface Heyue_OrderDetail_ViewController : SSKJ_BaseViewController
 
 @property (nonatomic,assign) NSInteger seletedIndex;
-//@property (nonatomic,strong) SSKJ_Market_Index_Model *model;//行情model
+
+
+#pragma mark 关闭定时器
+-(void)stopRuntimer;
+#pragma mark 开启定时器
+-(void)startRuntimer;
+
+
 @end
 
 NS_ASSUME_NONNULL_END

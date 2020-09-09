@@ -56,7 +56,7 @@
     if (_imageV == nil)
     {
         
-        _imageV = [FactoryUI createImageViewWithFrame:CGRectZero imageName:@"okoexdefault"];
+        _imageV = [FactoryUI createImageViewWithFrame:CGRectZero imageName:@"kbdefault"];
         [_imageV setContentMode:UIViewContentModeScaleAspectFill];
         [_imageV.layer setMasksToBounds:YES];
         [self.contentView addSubview:_imageV];

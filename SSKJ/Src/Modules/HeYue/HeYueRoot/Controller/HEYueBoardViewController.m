@@ -21,6 +21,8 @@
 #import "Home_Segment_View.h"
 #import "Heyue_OrderInfo_Model.h"
 #import "Heyue_Leverage_Model.h"
+#import "LJWeakProxy.h"
+
 
 
 
@@ -74,10 +76,43 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:5.f target:self selector:@selector(timerRefreash:) userInfo:nil repeats:YES];
     [self setNavigationBarHidden:NO];
     [self requestGetLeverageURLURL];
+    [self startRuntimer];
 }
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self stopRuntimer];
+}
+
+
+
+
+
+#pragma mark 开启定时器
+-(void)startRuntimer
+{
+    [self stopRuntimer];
+    // 这里的target又发生了变化
+    self.timer = [NSTimer timerWithTimeInterval:2.0 target:[LJWeakProxy proxyWithTarget:self] selector:@selector(timerRefreash:) userInfo:nil repeats:YES];
+    [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];
+    [self.timer fire];
+}
+
+
+#pragma mark 开启定时器
+-(void)stopRuntimer
+{
+    [self.timer invalidate];
+    self.timer = nil;
+}
+
+
+
+
+
 
 
 -(void)didGetCoinModel:(NSNotification *)notification
@@ -196,6 +231,11 @@
     if (kLogin)
     {
         [self request_Tongji_URL];
+        NSLog(@"定时器获取合约浮动盈亏");
+    }
+    else
+    {
+        [self stopRuntimer];
     }
 }
 
@@ -290,7 +330,7 @@
         case 0:
         {
             [self.heyueVC refreshCodeDate];
-            //[self.weituoVC closetimer];
+//            [self.weituoVC st];
         }
             break;
         case 1:

@@ -294,7 +294,7 @@
         _titleLabel = [[UILabel alloc]init];
         [_titleLabel setFont:systemBoldFont(ScaleW(24))];
         [_titleLabel setTextColor:kTitleColor];
-        [_titleLabel setText:SSKJLanguage(@"登录Okoex")];
+        [_titleLabel setText:SSKJLanguage(@"登录KB")];
     }
     return _titleLabel;
 }
