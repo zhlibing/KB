@@ -36,7 +36,7 @@
 
 
 
-#define ProductBaseServer  @"https://kbcoin.top"
+#define ProductBaseServer  @"https://www.kbcoin.top"
 
 #define ImageBaseServer  @"http://atex001.oss-cn-hongkong.aliyuncs.com"
 
