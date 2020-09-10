@@ -60,7 +60,7 @@
             self.lineView.centerX = btn.centerX;
             btn.selected = YES;
         }
-        btn.backgroundColor = kBgColor;
+        btn.backgroundColor = UIColorFromRGB(0x131E31);
         btn.titleLabel.adjustsFontSizeToFitWidth = YES;
         [btn addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
         
@@ -77,12 +77,12 @@
 
 -(UIView *)lineView
 {
-    if (nil == _lineView) {
+    if (nil == _lineView)
+    {
         CGFloat width = self.width / self.titlesArray.count;
         
         _lineView = [[UIImageView alloc]initWithFrame:CGRectMake(0, self.height - ScaleW(3), ScaleW(19), ScaleW(3))];
         _lineView.backgroundColor = kBgColor;
-//        _lineView.image = [UIImage imageNamed:@"segment_line"];
     }
     return _lineView;
 }
@@ -150,26 +150,11 @@
 -(void)setMoreWithTitle:(NSString *)title
 {
     WS(weakSelf);
-//    for (UIButton *button in self.buttonArray) {
-//        if (button == self.moreButton) {
-//            self.moreButton.selected = YES;
-//        }else{
-//            button.selected = NO;
-//        }
-//    }
     self.selectedIndex = _titlesArray.count - 2;
     [self.moreButton setTitle:title forState:UIControlStateNormal];
     [UIView animateWithDuration:0.3 animations:^{
         weakSelf.lineView.centerX = weakSelf.moreButton.centerX;
     }];
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
 
 @end

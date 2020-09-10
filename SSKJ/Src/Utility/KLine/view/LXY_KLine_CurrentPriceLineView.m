@@ -82,13 +82,16 @@
     self.animationView.centerX = positionX;
     self.animationView.hidden = !isLast;
     _positionX = positionX;
-    if (positionX >= self.width -  1.5 *([LXY_KLinePositionTool kLineWidth] + [LXY_KLinePositionTool kLineGap])) {
+    if (positionX >= self.width -  1.5 *([LXY_KLinePositionTool kLineWidth] + [LXY_KLinePositionTool kLineGap]))
+    {
         self.animationView.hidden = YES;
         self.currentPriceButton.hidden = NO;
         self.currentPriceButton.centerX = ScreenWidth - 100;
         [self.currentPriceButton setTitle:[currentPrice stringByAppendingString:@"→"] forState:UIControlStateNormal];
         _isShowCurrent = NO;
-    }else{
+    }
+    else
+    {
         self.animationView.hidden = NO;
         self.currentPriceButton.hidden = YES;
         _isShowCurrent = YES;
@@ -107,10 +110,13 @@
 
     [[UIColor clearColor]setFill];
     CGContextSetLineWidth(context, 1);
-    if (_isShowCurrent == YES) {
+    if (_isShowCurrent == YES)
+    {
         CGContextMoveToPoint(context, self.positionX, self.height / 2);
         CGContextAddLineToPoint(context, self.width, self.height / 2);
-    }else{
+    }
+    else
+    {
         CGContextMoveToPoint(context, 0, self.height / 2);
         CGContextAddLineToPoint(context, self.currentPriceButton.x, self.height / 2);
         

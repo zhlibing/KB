@@ -316,6 +316,7 @@
 		43C595D6239DE3720089FD62 /* ImaginaryLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C595D5239DE3720089FD62 /* ImaginaryLineView.m */; };
 		43C595DD239F29AD0089FD62 /* HeYue_LeftSample_TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C595DC239F29AD0089FD62 /* HeYue_LeftSample_TableViewCell.m */; };
 		43D61BCD231DF93500B2D5D9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43D61BCC231DF93400B2D5D9 /* LaunchScreen.storyboard */; };
+		963777E02509B30100EBBE9C /* ProfitWeiTuoChiCangHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 963777DF2509B30100EBBE9C /* ProfitWeiTuoChiCangHelper.m */; };
 		963F50F324D59B9C00844D73 /* YYDiskCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 963F4FC024D59B9B00844D73 /* YYDiskCache.m */; };
 		963F50F424D59B9C00844D73 /* YYCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 963F4FC224D59B9B00844D73 /* YYCache.m */; };
 		963F50F524D59B9C00844D73 /* YYKVStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 963F4FC624D59B9B00844D73 /* YYKVStorage.m */; };
@@ -1110,6 +1111,8 @@
 		43D61BDD231F4D6500B2D5D9 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Main.strings; sourceTree = "<group>"; };
 		43D61BDF231F4DC200B2D5D9 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
 		43D61BE1231F4E3600B2D5D9 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
+		963777DE2509B30100EBBE9C /* ProfitWeiTuoChiCangHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfitWeiTuoChiCangHelper.h; sourceTree = "<group>"; };
+		963777DF2509B30100EBBE9C /* ProfitWeiTuoChiCangHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfitWeiTuoChiCangHelper.m; sourceTree = "<group>"; };
 		963F4FC024D59B9B00844D73 /* YYDiskCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYDiskCache.m; sourceTree = "<group>"; };
 		963F4FC124D59B9B00844D73 /* YYKVStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYKVStorage.h; sourceTree = "<group>"; };
 		963F4FC224D59B9B00844D73 /* YYCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYCache.m; sourceTree = "<group>"; };
@@ -2049,6 +2052,8 @@
 				044AFD6B241B31C300326874 /* SSKJ_baseBtn.m */,
 				044AFD6E241B31C300326874 /* SSKJ_baseTableViewCell.h */,
 				044AFD6D241B31C300326874 /* SSKJ_baseTableViewCell.m */,
+				963777DE2509B30100EBBE9C /* ProfitWeiTuoChiCangHelper.h */,
+				963777DF2509B30100EBBE9C /* ProfitWeiTuoChiCangHelper.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -2890,11 +2895,11 @@
 			children = (
 				0455BDF12425B71A00EBE580 /* Heyue_OrderDetail_ViewController.h */,
 				0455BDF22425B71A00EBE580 /* Heyue_OrderDetail_ViewController.m */,
+				439DEE5F2399265D00B2C07B /* Heyue_ChiCang_Order_VC.h */,
 				439DEE5B2399265D00B2C07B /* Heyue_ChiCang_Order_VC.m */,
 				439DEE5C2399265D00B2C07B /* Heyue_WeiTuo_Order_VC.h */,
-				439DEE5E2399265D00B2C07B /* Heyue_CengJiao_Order_VC.h */,
-				439DEE5F2399265D00B2C07B /* Heyue_ChiCang_Order_VC.h */,
 				439DEE612399265D00B2C07B /* Heyue_WeiTuo_Order_VC.m */,
+				439DEE5E2399265D00B2C07B /* Heyue_CengJiao_Order_VC.h */,
 				439DEE622399265D00B2C07B /* Heyue_CengJiao_Order_VC.m */,
 				065BD19024495CDC00FB4F65 /* Heyue_Share_ViewController.h */,
 				065BD19124495CDC00FB4F65 /* Heyue_Share_ViewController.m */,
@@ -4077,6 +4082,7 @@
 				439DEECA2399287100B2C07B /* JB_BBTrade_SocketDealOrder_Model.m in Sources */,
 				4359250923580E8E0005C1AA /* LXY_Deep_TableViewCell.m in Sources */,
 				43798EF923A47FBF00A79C36 /* Home_NoticeList_ViewController.m in Sources */,
+				963777E02509B30100EBBE9C /* ProfitWeiTuoChiCangHelper.m in Sources */,
 				044AFD6F241B31C400326874 /* SSKJ_baseBtn.m in Sources */,
 				963F517B24D59B9C00844D73 /* MKAnnotationView+YYWebImage.m in Sources */,
 				96666F6424DD1A9400080BED /* IdverificationControl.m in Sources */,

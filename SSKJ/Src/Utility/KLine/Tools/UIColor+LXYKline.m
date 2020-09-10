@@ -20,21 +20,22 @@
 
 +(UIColor *)lxy_kLineBGColor       // k线图背景色
 {
-//    return [WLTools stringToColor:@"#131F2F"];
-    return kBgColor;
+
+//    return kBgColor;
+    return UIColorFromRGB(0x131E31);
 }
 
 +(UIColor *)lxy_kLine_Main_BGColor       // k线图主k线图背景色
 {
-//    return [WLTools stringToColor:@"#131F2F"];
-    return kBgColor;
+//    return kBgColor;
+    return UIColorFromRGB(0x131E31);
 }
 
 
 +(UIColor *)lxy_kLine_Volume_BGColor       // k线图成交量图背景色
 {
-//    return [WLTools stringToColor:@"#131F2F"];
-    return kBgColor;
+//    return kBgColor;
+    return UIColorFromRGB(0x131E31);
 }
 +(UIColor *)lxy_kLine_BorderColor          // 边框颜色
 {

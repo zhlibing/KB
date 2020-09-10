@@ -24,7 +24,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = kBgColor;
+        self.backgroundColor = UIColorFromRGB(0x131E31);
         [self addLabels];
     }
     return self;

@@ -131,24 +131,7 @@
         [MBHUD showError:SSKJLocalized(@"网错出错", nil)];
     }];
     
-    
-    [[WLHttpManager shareManager] requestWithURL_HTTPCode:URL_Invite_Rule RequestType:RequestTypeGet Parameters:@{} Success:^(NSInteger statusCode, id responseObject)
-    {
-        
-        WL_Network_Model *netWorkModel = [WL_Network_Model mj_objectWithKeyValues:responseObject];
-        if (netWorkModel.status.integerValue == SUCCESSED )
-        {
-           
-            
-        }
-        else
-        {
-        }
-        
-    } Failure:^(NSError *error, NSInteger statusCode, id responseObject)
-    {
-        
-    }];
+
 }
 
 

@@ -37,7 +37,7 @@
 
 @property (nonatomic,strong) UIView *yingKuiBgView;
 
-@property(nonatomic, strong)Heyue_OrderInfo_Model *model;
+
 @end
 
 @implementation Heyue_orderDetail_headerView
@@ -290,8 +290,10 @@
     return _fengxianlvLabel;
 }
 
-- (void)initDataWithOrderInfoModel:(Heyue_OrderInfo_Model *)model{
-    self.model = model;
+
+- (void)setModel:(Heyue_OrderInfo_Model *)model
+{
+    _model = model;
     
     self.dongtaiquanyiLabel.text = [SSTool HeyuePname:@"USDT" price:model.totalusdt];
     self.keyongLabel.text = [SSTool HeyuePname:@"USDT" price:model.keyong_price];
@@ -299,52 +301,17 @@
     self.fudongyingkuiLabel.text = [SSTool HeyuePname:@"USDT" price:model.yingkui];
     self.fengxianlvLabel.text = [NSString stringWithFormat:@"%@%@",[SSTool disposePname:@"2" price:[NSString stringWithFormat:@"%.9f", model.risk.doubleValue]],@"%"];
     
-    if ([self.fudongyingkuiLabel.text containsString:@"-"]) {
-//        self.fudongyingkuiLabel.textColor = kMarketDown;
-//        self.fudongyingkuiTitle.textColor = kMarketDown;
+    if ([self.fudongyingkuiLabel.text containsString:@"-"])
+    {
         self.yingKuiBgView.backgroundColor = kMarketDown;
-    }else{
-//        self.fudongyingkuiLabel.textColor = kMarketUp;
-//        self.fudongyingkuiTitle.textColor = kMarketUp;
+    }
+    else
+    {
         self.yingKuiBgView.backgroundColor = kMarketUp;
-
     }
 }
 
 
-
-
-
-- (void)updateWith:(NSArray *)array{
-//    if (!array.count) {
-//        return;
-//    }
-    
-    //    总浮动盈亏=所有浮动盈亏相加
-    //    动态权益=总浮动盈亏+可用usdt+冻结usdt
-    //    爆仓率=动态权益/冻结usdt
-    
-//    double value = 0.0;
-//    for (Heyue_OrderDdetail_Model *subModel in array) {
-//        value += subModel.floatingPL.doubleValue;
-////        NSLog(@"订单推送浮动盈亏***%f",value);
-//    }
-//    self.fudongyingkuiLabel.text = [SSTool HeyuePname:@"USDT" price:@(value)];
-//    if ([self.fudongyingkuiLabel.text containsString:@"-"]) {
-//            self.yingKuiBgView.backgroundColor = kMarketDown;
-//    }else{
-//            self.yingKuiBgView.backgroundColor = kMarketUp;
-//    }
-    
-//    double dongtaiquanyi = value + self.model.usableFund.doubleValue + self.model.hasUsedFund.doubleValue;
-//    self.dongtaiquanyiLabel.text = [SSTool HeyuePname:@"USDT" price:@(dongtaiquanyi)];
-//
-//    if (self.model.hasUsedFund.doubleValue > 0) {
-//        double rate = dongtaiquanyi * 100 /self.model.hasUsedFund.doubleValue;
-//        self.fengxianlvLabel.text = [NSString stringWithFormat:@"%@%@",[SSTool disposePname:@"2" price:@(rate)],@"%"];
-//    }
-
-}
 
 
 @end

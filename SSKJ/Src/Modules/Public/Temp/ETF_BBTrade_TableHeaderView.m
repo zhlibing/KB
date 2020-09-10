@@ -35,8 +35,6 @@
         [self addSubview:self.highTitleLabel];
         [self addSubview:self.lowLabel];
         [self addSubview:self.lowTitleLabel];
-//        [self addSubview:self.volumeTitleLabel];
-//        [self addSubview:self.volumeLabel];
     }
     return self;
 }
@@ -71,8 +69,9 @@
 
 - (UILabel *)highLabel
 {
-    if (nil == _highLabel) {
-        _highLabel = [WLTools allocLabel:@"0000.0000" font:systemFont(ScaleW(10)) textColor:kSubTitleColor frame:CGRectMake(ScreenWidth - ScaleW(15) - ScaleW(70), 0, ScaleW(70), ScaleW(10)) textAlignment:NSTextAlignmentRight];
+    if (nil == _highLabel)
+    {
+        _highLabel = [WLTools allocLabel:@"0000.0000" font:systemFont(ScaleW(10)) textColor:kWhiteColor frame:CGRectMake(ScreenWidth - ScaleW(15) - ScaleW(70), 0, ScaleW(70), ScaleW(10)) textAlignment:NSTextAlignmentRight];
         _highLabel.centerY = self.currentPricelabel.centerY;
     }
     return _highLabel;
@@ -90,7 +89,7 @@
 - (UILabel *)lowLabel
 {
     if (nil == _lowLabel) {
-        _lowLabel = [WLTools allocLabel:@"0000.0000" font:systemFont(ScaleW(10)) textColor:kSubTitleColor frame:CGRectMake(ScreenWidth - ScaleW(15) - ScaleW(70), self.highTitleLabel.bottom + ScaleW(5), ScaleW(70), ScaleW(10)) textAlignment:NSTextAlignmentRight];
+        _lowLabel = [WLTools allocLabel:@"0000.0000" font:systemFont(ScaleW(10)) textColor:kWhiteColor frame:CGRectMake(ScreenWidth - ScaleW(15) - ScaleW(70), self.highTitleLabel.bottom + ScaleW(5), ScaleW(70), ScaleW(10)) textAlignment:NSTextAlignmentRight];
         _lowLabel.centerY = self.CNYLabel.centerY;
     }
     return _lowLabel;
@@ -98,7 +97,8 @@
 
 -(UILabel *)lowTitleLabel
 {
-    if (nil == _lowTitleLabel) {
+    if (nil == _lowTitleLabel)
+    {
         _lowTitleLabel = [WLTools allocLabel:SSKJLocalized(@"低",nil) font:systemFont(ScaleW(12)) textColor:kSubTitleColor frame:CGRectMake(self.highLabel.x - ScaleW(10) - ScaleW(50), 0, ScaleW(50), ScaleW(12)) textAlignment:NSTextAlignmentRight];
         _lowTitleLabel.centerY = self.lowLabel.centerY;
     }

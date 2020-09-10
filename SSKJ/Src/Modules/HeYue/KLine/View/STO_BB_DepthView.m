@@ -33,7 +33,7 @@ static NSString *cellid = @"STO_BB_DepthViewCell";
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = kBgColor;
+        [self setBackgroundColor:UIColorFromRGB(0x131E31)];
         [self depthView];
         [self tableView];
     }
@@ -100,13 +100,13 @@ static NSString *cellid = @"STO_BB_DepthViewCell";
         [self addSubview:_tableView];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.backgroundColor = kBgColor;
+        _tableView.backgroundColor = UIColorFromRGB(0x131E31);
         _tableView.rowHeight = ScaleW(24);
         _tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         
         UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScaleW(40))];
-        header.backgroundColor = kBgColor;
+        header.backgroundColor = UIColorFromRGB(0x131E31);
         _tableView.tableHeaderView = header;
 
         UILabel *maiLable = [self getHeaderLabel];
@@ -238,7 +238,7 @@ static NSString *cellid = @"STO_BB_DepthViewCell";
 
 
 - (UILabel *)getContentLabel{
-    UILabel *label = [WLTools allocLabel:nil font:kFont(12) textColor:kTitleColor frame:CGRectZero textAlignment:(NSTextAlignmentLeft)];
+    UILabel *label = [WLTools allocLabel:nil font:kFont(12) textColor:kWhiteColor frame:CGRectZero textAlignment:(NSTextAlignmentLeft)];
     label.numberOfLines = 1;
     label.adjustsFontSizeToFitWidth = YES;
     return label;

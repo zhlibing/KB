@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface Heyue_Share_ViewController : SSKJ_BaseViewController
+
 @property (nonatomic, strong) Heyue_Order_ChengjiaoModel *chengjiaoModel;
 @end
 

@@ -146,7 +146,8 @@
     if (_bannerView==nil)
     {
         _bannerView=[[UIImageView alloc]init];
-        [_bannerView setImage:[UIImage imageNamed:@"banner_default"]];
+        [_bannerView setImage:[UIImage imageNamed:SSKJLanguage(@"banner_default")]];
+        [_bannerView setContentMode:UIViewContentModeScaleAspectFill];
         [_bannerView.layer setMasksToBounds:YES];
     }
     return _bannerView;

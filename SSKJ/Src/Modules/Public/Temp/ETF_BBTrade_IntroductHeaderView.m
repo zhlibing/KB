@@ -14,12 +14,7 @@
 @property (nonatomic, strong) UIButton *deepButton; // 深度
 @property (nonatomic, strong) UIButton *introductButton;    // 简介
 @property (nonatomic, strong) UIView *segmentLineView;
-@property (nonatomic, strong) UIView *lineView;
 
-//成交左边竖线
-@property (nonatomic, strong) UIView *leftView;
-//成交右边竖线
-@property (nonatomic, strong) UIView *rightView;
 
 @end
 
@@ -29,33 +24,15 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = kBgColor;
+        self.backgroundColor = UIColorFromRGB(0x131E31);
         [self addSubview:self.dealButton];
         [self addSubview:self.deepButton];
         [self addSubview:self.introductButton];
         [self addSubview:self.segmentLineView];
-        [self addSubview:self.lineView];
-        [self addSubview:self.leftView];
-        [self addSubview:self.rightView];
     }
     return self;
 }
 
-- (UIView *)leftView {
-    if (nil == _leftView) {
-        _leftView = [[UIView alloc] initWithFrame:CGRectMake(_deepButton.right, (self.height - ScaleW(20))/2, ScaleW(1), ScaleW(20))];
-        _leftView.backgroundColor = kLineColor;
-    }
-    return _leftView;
-}
-
-- (UIView *)rightView {
-    if (nil == _rightView) {
-        _rightView = [[UIView alloc] initWithFrame:CGRectMake(_dealButton.right, (self.height - ScaleW(20))/2, ScaleW(1), ScaleW(20))];
-        _rightView.backgroundColor = kLineColor;
-    }
-    return _rightView;
-}
 
 -(UIButton *)deepButton
 {
@@ -63,14 +40,10 @@
         _deepButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, self.width / 3, self.height)];
         [_deepButton setTitle:SSKJLocalized(@"深度", nil) forState:UIControlStateNormal];
         [_deepButton setTitleColor:kSubTitleColor forState:UIControlStateNormal];
-        [_deepButton setTitleColor:kBlueColor forState:UIControlStateSelected];
+        [_deepButton setTitleColor:kWhiteColor forState:UIControlStateSelected];
         _deepButton.titleLabel.font = systemFont(ScaleW(15));
         _deepButton.selected = YES;
         [_deepButton addTarget:self action:@selector(deepEvent) forControlEvents:UIControlEventTouchUpInside];
-        UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(_deepButton.width, 0, 0.5, ScaleW(20))];
-        lineView.centerY = _deepButton.height / 2;
-        lineView.backgroundColor = kBgColor;
-        [_deepButton addSubview:lineView];
     }
     return _deepButton;
 }
@@ -82,15 +55,10 @@
         _dealButton = [[UIButton alloc]initWithFrame:CGRectMake(self.deepButton.right, 0, self.width / 3, self.height)];
         [_dealButton setTitle:SSKJLocalized(@"成交", nil) forState:UIControlStateNormal];
         [_dealButton setTitleColor:kSubTitleColor forState:UIControlStateNormal];
-        [_dealButton setTitleColor:kBlueColor forState:UIControlStateSelected];
+        [_dealButton setTitleColor:kWhiteColor forState:UIControlStateSelected];
         _dealButton.titleLabel.font = systemFont(ScaleW(15));
         _dealButton.selected = NO;
         [_dealButton addTarget:self action:@selector(dealEvent) forControlEvents:UIControlEventTouchUpInside];
-        
-        UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(_dealButton.width, 0, 0.5, ScaleW(20))];
-        lineView.centerY = _dealButton.height / 2;
-        lineView.backgroundColor = kBgColor;
-        [_dealButton addSubview:lineView];
     }
     return _dealButton;
 }
@@ -104,7 +72,7 @@
         _introductButton = [[UIButton alloc]initWithFrame:CGRectMake(self.dealButton.right, 0, self.width / 3, self.height)];
         [_introductButton setTitle:SSKJLocalized(@"简介", nil) forState:UIControlStateNormal];
         [_introductButton setTitleColor:kSubTitleColor forState:UIControlStateNormal];
-        [_introductButton setTitleColor:kBlueColor forState:UIControlStateSelected];
+        [_introductButton setTitleColor:kWhiteColor forState:UIControlStateSelected];
         _introductButton.titleLabel.font = systemFont(ScaleW(15));
         _introductButton.selected = NO;
         [_introductButton addTarget:self action:@selector(introductEvent) forControlEvents:UIControlEventTouchUpInside];
@@ -116,21 +84,12 @@
 {
     if (nil == _segmentLineView) {
         _segmentLineView = [[UIView alloc]initWithFrame:CGRectMake(0, self.height - 2, ScaleW(30), 2)];
-        _segmentLineView.backgroundColor = kBlueColor;
+        _segmentLineView.backgroundColor = kWhiteColor;
         _segmentLineView.centerX = self.deepButton.centerX;
     }
     return _segmentLineView;
 }
 
-
--(UIView *)lineView
-{
-    if (nil == _lineView) {
-        _lineView = [[UIView alloc]initWithFrame:CGRectMake(0, self.height - 0.5, self.width, 0.5)];
-        _lineView.backgroundColor = kLineColor;
-    }
-    return _lineView;
-}
 
 
 -(void)dealEvent
@@ -171,24 +130,13 @@
     }
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
 
 - (void)changeUI
 {
-//    _orderLabel.hidden = YES;
-    _lineView.hidden = YES;
-    
-    
+       
     _segmentLineView.hidden = NO;
     _dealButton.hidden = NO;
     _introductButton.hidden = NO;
-//    _depthButton.hidden = NO;
     
 }
 @end

@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "06304A9021B907FB00279355"
-               BuildableName = "OKOEX.app"
+               BuildableName = "KB.app"
                BlueprintName = "SSKJ"
                ReferencedContainer = "container:SSKJ.xcodeproj">
             </BuildableReference>
@@ -31,7 +31,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "06304A9021B907FB00279355"
-            BuildableName = "OKOEX.app"
+            BuildableName = "KB.app"
             BlueprintName = "SSKJ"
             ReferencedContainer = "container:SSKJ.xcodeproj">
          </BuildableReference>
@@ -74,7 +74,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "06304A9021B907FB00279355"
-            BuildableName = "OKOEX.app"
+            BuildableName = "KB.app"
             BlueprintName = "SSKJ"
             ReferencedContainer = "container:SSKJ.xcodeproj">
          </BuildableReference>
@@ -91,7 +91,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "06304A9021B907FB00279355"
-            BuildableName = "OKOEX.app"
+            BuildableName = "KB.app"
             BlueprintName = "SSKJ"
             ReferencedContainer = "container:SSKJ.xcodeproj">
          </BuildableReference>

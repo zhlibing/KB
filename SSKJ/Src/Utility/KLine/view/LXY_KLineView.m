@@ -243,18 +243,13 @@
 }
 - (LXY_KLine_CurrentPriceLineView *)currentPirceLineView
 {
-    if (nil == _currentPirceLineView) {
+    if (nil == _currentPirceLineView)
+    {
         _currentPirceLineView = [[LXY_KLine_CurrentPriceLineView alloc]initWithFrame:CGRectMake(0, 0, self.kLine_MainView.width, 50)];
         _currentPirceLineView.hidden = YES;
         WS(weakSelf);
         _currentPirceLineView.toLastBlock = ^{
             
-            //            dispatch_async(dispatch_get_main_queue(), ^{
-            //                [UIView animateWithDuration:.3 animations:^{
-            //                    weakSelf.scrollView.contentOffset = CGPointMake(weakSelf.scrollView.contentSize.width - weakSelf.scrollView.width, 0);
-            //
-            //                }];
-            //            });
             [weakSelf.scrollView scrollRectToVisible:CGRectMake(weakSelf.scrollView.contentSize.width - weakSelf.scrollView.width, 0, weakSelf.scrollView.width, weakSelf.scrollView.height) animated:YES];
         };
     }
@@ -460,7 +455,6 @@
 -(void)setData:(NSArray *)dataArray klineType:(LXY_KLINETYPE)klineType timeFormatter:(NSString *)timeFormatter
 {
     self.formatterString = timeFormatter;
-    //    self.scrollView.contentOffset = CGPointMake(0, 0);
     self.originalDataSource = [NSMutableArray arrayWithArray:dataArray];
     
     self.klineType = klineType;
@@ -557,110 +551,86 @@
 -(void)refreshWithSocketData:(LXY_KLine_DataModel *)socketModel minuteInvital:(NSInteger)minuteInvital
 {
     LXY_KLine_DataModel *lastModel = self.dataSource.lastObject;
-    NSDate *lastDate1 = [NSDate dateWithTimeIntervalSince1970:(lastModel.timestamp.doubleValue)];
     
-    NSDate *socketDate = [NSDate dateWithTimeIntervalSince1970:(socketModel.timestamp.doubleValue)];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+    
+    NSDate *lastDate = [NSDate dateWithTimeIntervalSince1970:lastModel.timestamp.doubleValue];
+    
+    NSString *lastDateString = [formatter stringFromDate:lastDate];
+    NSDate *lastDate1 = [formatter dateFromString:lastDateString];
+    
+    NSDate *socketDate = [NSDate dateWithTimeIntervalSince1970:socketModel.timestamp.doubleValue];
     
     NSTimeInterval second = [socketDate timeIntervalSinceDate:lastDate1];
     
-    
-    
-    
-    if ([lastModel.volume floatValue] > 0)
-    {
-        [self setVolume:lastModel.volume];
-    }
-    
-    
-    
     if (second / 60 >= minuteInvital && minuteInvital != 0)
     {
-        [socketModel setVolume:self.volume];
+        
+        socketModel.open = lastModel.close;
+        socketModel.close = socketModel.price;
+        socketModel.high = socketModel.price;
+        socketModel.low = socketModel.price;
+        socketModel.timestamp = socketModel.timestamp;
+        
+        socketModel.volume = lastModel.volume;
         [self.dataSource addObject:socketModel];
         
         [self startDrawView];
-    }
-    else
-    {
-        lastModel.close = socketModel.price;
-        if (lastModel.low.doubleValue > socketModel.price.doubleValue)
-        {
-            lastModel.low = socketModel.price;
+    }else{
+        
+        
+        LXY_KLine_DataModel *lastModel1 = [[LXY_KLine_DataModel alloc] init];
+        
+        lastModel1.close = socketModel.price;
+        lastModel1.low = lastModel.low;
+        lastModel1.high = lastModel.high;
+        lastModel1.volume = lastModel.volume;
+        lastModel1.open = lastModel.open;
+        lastModel1.timestamp = socketModel.timestamp;
+        lastModel1.datetime = socketModel.datetime;
+        lastModel1.previousKlineModel = lastModel.previousKlineModel;
+        lastModel1.time = lastModel.time;
+        lastModel1.date = lastModel.date;
+        
+        if (lastModel1.low.doubleValue > socketModel.price.doubleValue) {
+            lastModel1.low = socketModel.price;
+            
         }
         
-        if (lastModel.high.doubleValue < socketModel.price.doubleValue) {
-            lastModel.high = socketModel.price;
+        if (lastModel1.high.doubleValue < socketModel.price.doubleValue) {
+            lastModel1.high = socketModel.price;
         }
         
-        lastModel.buy = socketModel.buy;
-        lastModel.sell = socketModel.sell;
+        [self.dataSource replaceObjectAtIndex:self.dataSource.count - 1 withObject:lastModel1];
+        lastModel1.dataSource = self.dataSource;
+        [self.kLine_accessoryLabelView showLabelWithModel:lastModel1];
+        [self.kLlie_volumeLabelView showLabelWithModel:lastModel1];
+        [lastModel1 setData];
+        
+        [self.kLineMAView showViewWith:self.dataSource.lastObject];
         
         self.kLine_MainView.dataSource = self.dataSource;
-        self.kLine_VolumeView.dataSource = self.dataSource;
-        if (self.isShowLast)
-        {
+        
+        if (self.isShowLast) {
             [self scrollViewDidScroll:self.scrollView];
         }
     }
     
     
+    if (self.kLine_tipView.hidden == NO)
+    {
+//        if (self.kLine_tipView.index == self.dataSource.count - 1)
+//        {
+//            [self.kLine_tipView showTipViewWith:self.dataSource.lastObject index:self.dataSource.count - 1];
+//        }
+    }
     
-    
-//    [self.currentPirceLineView setSocketPrice:socketModel.price];
-    return;
-    
-    
-    //    if (self.dataSource.count >= 5) {
-    //        double ma5 = 0;
-    //        for (NSInteger i = self.dataSource.count - 1; i >= self.dataSource.count - 5; i--) {
-    //            LXY_KLine_DataModel *model = self.dataSource[i];
-    //            ma5 += model.ma5;
-    //        }
-    //
-    //        ma5 = ma5 / 5;
-    //        socketModel.ma5 = ma5;
-    //    }
-    //
-    //    if (self.dataSource.count >= 10) {
-    //        double ma10 = 0;
-    //        for (NSInteger i = self.dataSource.count - 1; i >= self.dataSource.count - 10; i--) {
-    //            LXY_KLine_DataModel *model = self.dataSource[i];
-    //            ma10 += model.ma10;
-    //        }
-    //
-    //        ma10 = ma10 / 10;
-    //        socketModel.ma10 = ma10;
-    //    }
-    //
-    //    if (self.dataSource.count >= 20) {
-    //        double ma20 = 0;
-    //        for (NSInteger i = self.dataSource.count - 1; i >= self.dataSource.count - 20; i--) {
-    //            LXY_KLine_DataModel *model = self.dataSource[i];
-    //            ma20 += model.ma20;
-    //        }
-    //
-    //        ma20 = ma20 / 20;
-    //        socketModel.ma20 = ma20;
-    //    }
-    //
-    //
-    //    NSTimeInterval timeInterval = [WLTools timeIntervalWithFromTime:lastModel.datetime toTime:socketModel.datetime];
-    //
-    //    if (timeInterval >= self.refreshTimeCount && self.refreshTimeCount != 0) {
-    //        [self.dataSource addObject:socketModel];
-    //        CGFloat klineWidth = [LXY_KLinePositionTool kLineGap] + [LXY_KLinePositionTool kLineWidth];
-    //        self.scrollView.contentSize = CGSizeMake(klineWidth * self.dataSource.count, 0);
-    //        [self.scrollView scrollRectToVisible:CGRectMake(self.scrollView.contentSize.width - self.scrollView.width, 0, self.scrollView.width, self.scrollView.height) animated:YES];
-    //    }else{
-    //
-    //        [self.dataSource replaceObjectAtIndex:self.dataSource.count - 1 withObject:socketModel];
-    //        if (self.isShowLast) {
-    //            [self scrollViewDidScroll:self.scrollView];
-    //        }
-    //    }
-    //
-    
+    [self.currentPirceLineView setSocketPrice:socketModel.price];
+  
 }
+
+
 
 - (void)setCurrentPrice:(NSString *)price{
     [self.currentPirceLineView setSocketPrice:price];
@@ -1100,13 +1070,14 @@
     [UIView animateWithDuration:0.1 animations:^{
         LXY_KLine_DataModel *dataModel = self.dataSource.lastObject;
         LXY_KLine_StockChartPositionModel *lastPositionModel = positionModel;
-        if (index >= self.dataSource.count) {
+        if (index >= self.dataSource.count)
+        {
             //            lastPositionModel = self.dataSource.lastObject;
         }
         LXY_KLine_DataModel *model = self.dataSource.lastObject;
         
-        CGFloat xx = self.scrollView.width - self.scrollView.width / 4;
-        if (positionModel.centerX >= self.kLine_MainView.width - 1.5 * ([LXY_KLinePositionTool kLineWidth] + [LXY_KLinePositionTool kLineGap])) {
+        if (positionModel.centerX >= self.kLine_MainView.width - 1.5 * ([LXY_KLinePositionTool kLineWidth] + [LXY_KLinePositionTool kLineGap]))
+        {
             weakSelf.currentPirceLineView.centerY = self.kLine_MainView.height - 30;
             [weakSelf.currentPirceLineView setCurrentPriceWithPositionY:self.kLine_MainView.height - 30 positionX:positionModel.centerX isLast:weakSelf.isShowLast currentPrice:model.close];
             [weakSelf.kLine_PriceView hideCurrentPriceLabel];

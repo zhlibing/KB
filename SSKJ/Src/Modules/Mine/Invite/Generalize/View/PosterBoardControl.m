@@ -14,9 +14,11 @@
 @property (nonatomic, strong) UILabel *titLabel;
 @property (nonatomic, strong) UIImageView *leftImageView;
 @property (nonatomic, strong) UIImageView *leftCodeImageView;
+
 @property (nonatomic, strong) UIImageView *rightImageView;
 @property (nonatomic, strong) UIImageView *rightCodeImageView;
 @property (nonatomic, strong) UILabel *rightCodeLabel;
+@property (nonatomic, strong) UILabel *rightTipLabel;
 @property (nonatomic, strong) UILabel *tipLabel;
 @property (nonatomic, strong) UIImageView *leftselectImageView;
 @property (nonatomic, strong) UIImageView *rightselectImageView;
@@ -84,9 +86,11 @@
         [self.boardView addSubview:self.tipLabel];
         [self.leftImageView addSubview:self.leftCodeImageView];
         [self.leftImageView addSubview:self.leftselectImageView];
+        
         [self.rightImageView addSubview:self.rightCodeImageView];
         [self.rightImageView addSubview:self.rightselectImageView];
         [self.rightImageView addSubview:self.rightCodeLabel];
+        [self.rightImageView addSubview:self.rightTipLabel];
         
         [self addTarget:self action:@selector(hide) forControlEvents:UIControlEventTouchUpInside];
         
@@ -109,7 +113,7 @@
         
         [self.leftCodeImageView mas_makeConstraints:^(MASConstraintMaker *make) {
            
-            make.bottom.equalTo(self.leftImageView.mas_bottom).offset(-50);
+            make.bottom.equalTo(self.leftImageView.mas_bottom).offset(-40);
             make.centerX.equalTo(self.leftImageView.mas_centerX);
             make.width.height.equalTo(@(60));
             
@@ -156,6 +160,15 @@
             make.left.equalTo(self.rightImageView.mas_left).offset(5);
             
         }];
+        
+        [self.rightTipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+           
+            make.top.equalTo(self.rightCodeLabel.mas_bottom).offset(10);
+            make.left.equalTo(self.rightCodeLabel.mas_left);
+            
+        }];
+        
+        
         
         
         
@@ -314,13 +327,25 @@
 }
 
 
+-(UILabel *)rightTipLabel
+{
+    if (!_rightTipLabel)
+    {
+        _rightTipLabel = [[UILabel alloc]init];
+        [_rightTipLabel setFont:systemFont(ScaleW(8))];
+        [_rightTipLabel setTextColor:kTitleColor];
+        [_rightTipLabel setText:SSKJLanguage(@"邀请你加入，长按识别二维码")];
+    }
+    return _rightTipLabel;
+}
+
 -(UILabel *)tipLabel
 {
     if (!_tipLabel)
     {
         _tipLabel = [[UILabel alloc]init];
         [_tipLabel setFont:systemFont(ScaleW(14))];
-        [_tipLabel setTextColor:kSubTitleColor];
+        [_tipLabel setTextColor:kTitleColor];
         [_tipLabel setText:SSKJLanguage(@"选择推广海报长按保存到本地")];
     }
     return _tipLabel;
@@ -394,7 +419,7 @@
     {
         _rightCodeLabel = [[UILabel alloc]init];
         [_rightCodeLabel setFont:systemBoldFont(ScaleW(10))];
-        [_rightCodeLabel setTextColor:kWhiteColor];
+        [_rightCodeLabel setTextColor:kTitleColor];
     }
     return _rightCodeLabel;
 }

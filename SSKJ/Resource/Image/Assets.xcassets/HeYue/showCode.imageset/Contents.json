@@ -5,12 +5,12 @@
       "scale" : "1x"
     },
     {
-      "filename" : "banner_default@2x.png",
+      "filename" : "showCode@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "banner_default@3x.png",
+      "filename" : "showCode@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

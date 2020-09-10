@@ -19,34 +19,26 @@
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    if (self) {
-        
-//        self.titlesArray = @[
-//                             [NSString stringWithFormat:@"1%@",SSKJLocalized(@"分", nil)],
-//                             [NSString stringWithFormat:@"5%@",SSKJLocalized(@"分", nil)],
-//                             [NSString stringWithFormat:@"30%@",SSKJLocalized(@"分", nil)],
-//                             [NSString stringWithFormat:@"1%@",SSKJLocalized(@"周", nil)],
-//                             [NSString stringWithFormat:@"1%@",SSKJLocalized(@"月", nil)]
-//                             ];
+    if (self)
+    {
         [self addSubview:self.backView];
-//        [self addButons];
     }
     return self;
 }
 
-- (void)setTitlesArray:(NSArray *)titlesArray{
+- (void)setTitlesArray:(NSArray *)titlesArray
+{
     _titlesArray = titlesArray;
     [self addButons];
 }
 
 -(UIView *)backView
 {
-    if (nil == _backView) {
+    if (nil == _backView)
+    {
         _backView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.width, ScaleW(40))];
-        _backView.backgroundColor = kSubBgColor;
+        _backView.backgroundColor = UIColorFromRGB(0x131E31);
         _backView.layer.masksToBounds = YES;
-//        _backView.layer.borderColor = kBlueColor.CGColor;
-//        _backView.layer.borderWidth = 0.5;
     }
     return _backView;
 }

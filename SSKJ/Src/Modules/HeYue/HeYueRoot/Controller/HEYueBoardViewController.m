@@ -21,8 +21,7 @@
 #import "Home_Segment_View.h"
 #import "Heyue_OrderInfo_Model.h"
 #import "Heyue_Leverage_Model.h"
-#import "LJWeakProxy.h"
-
+#import "ProfitWeiTuoChiCangHelper.h"
 
 
 
@@ -34,7 +33,6 @@
 @property (nonatomic, strong) SSKJ_ScrollView *scrollView;
 @property (nonatomic, strong) HEYue_ViewController *heyueVC;
 @property (nonatomic, strong) Heyue_ChiCang_Order_VC *chiCangVC;
-@property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic, strong) Heyue_Leverage_Model *leverage_Model;
 @property (nonatomic, strong) SSKJ_Market_Index_Model *model;
 
@@ -67,7 +65,14 @@
     [self.view addSubview:self.segmentControl];
     [self.view addSubview:self.scrollView];
     
-    
+    WS(weakSelf);
+    [[ProfitWeiTuoChiCangHelper shareHelper] setGetProfitWeiTuoChiCangBlock:^(Heyue_OrderInfo_Model * _Nonnull profitModel, NSArray * _Nonnull weituoArray, NSArray * _Nonnull chicangArray)
+     {
+        
+        [weakSelf.headerView setModel:profitModel];
+        [weakSelf.chiCangVC setItemArry:weituoArray];
+        [weakSelf.heyueVC setItemArray:chicangArray];
+    }];
     
     
 }
@@ -78,36 +83,15 @@
     [super viewWillAppear:animated];
     [self setNavigationBarHidden:NO];
     [self requestGetLeverageURLURL];
-    [self startRuntimer];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [self stopRuntimer];
 }
 
 
 
-
-
-#pragma mark 开启定时器
--(void)startRuntimer
-{
-    [self stopRuntimer];
-    // 这里的target又发生了变化
-    self.timer = [NSTimer timerWithTimeInterval:2.0 target:[LJWeakProxy proxyWithTarget:self] selector:@selector(timerRefreash:) userInfo:nil repeats:YES];
-    [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];
-    [self.timer fire];
-}
-
-
-#pragma mark 开启定时器
--(void)stopRuntimer
-{
-    [self.timer invalidate];
-    self.timer = nil;
-}
 
 
 
@@ -226,55 +210,14 @@
 
 
 
--(void)timerRefreash:(NSTimer *)timer
-{
-    if (kLogin)
-    {
-        [self request_Tongji_URL];
-        NSLog(@"定时器获取合约浮动盈亏");
-    }
-    else
-    {
-        [self stopRuntimer];
-    }
-}
-
 
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
-    [self.timer invalidate];
-    self.timer = nil;
 }
 
 
 
 #pragma mark - NetWork Method 网络请求
-#pragma mark 网络请求 浮动盈亏 爆仓率 --
-- (void)request_Tongji_URL
-{
-    
-    WS(weakSelf);
-    [[WLHttpManager shareManager] requestWithURL_HTTPCode:URL_HEYUE_Info_URL RequestType:RequestTypeGet Parameters:nil Success:^(NSInteger statusCode, id responseObject)
-    {
-        WL_Network_Model *netModel = [WL_Network_Model mj_objectWithKeyValues:responseObject];
-        
-        if (netModel.status.integerValue == 200)
-        {
-            Heyue_OrderInfo_Model *model = [Heyue_OrderInfo_Model mj_objectWithKeyValues:netModel.data];
-            [weakSelf.headerView setModel:model];
-            
-            
-        }
-        else
-        {
-            [MBProgressHUD showError:netModel.msg];
-        }
-        
-    } Failure:^(NSError *error, NSInteger statusCode, id responseObject) {
-    }];
-}
-
-
 - (void)requestGetLeverageURLURL
 {
     if (self.model.code.length < 1)

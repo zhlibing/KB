@@ -42,7 +42,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = kSubBgColor;
+        self.backgroundColor = UIColorFromRGB(0x131E31);
         self.mainAccessoryArray = @[@"MA",@"BOLL"];
         self.subAccessoryArray = @[@"MACD",@"KDJ",@"RSI",@"WR"];
         

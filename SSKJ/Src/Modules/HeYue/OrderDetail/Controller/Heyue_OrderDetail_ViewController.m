@@ -18,7 +18,7 @@
 #import "Heyue_CengJiao_Order_VC.h"
 
 #import "Heyue_OrderInfo_Model.h"
-#import "LJWeakProxy.h"
+#import "ProfitWeiTuoChiCangHelper.h"
 
 
 @interface Heyue_OrderDetail_ViewController ()<UIScrollViewDelegate>
@@ -33,8 +33,7 @@
 
 @property (nonatomic, strong) Heyue_CengJiao_Order_VC *chengjiaoVC;
 
-//自动刷新Timer
-@property(nonatomic,strong)NSTimer *timer;
+
 @end
 
 @implementation Heyue_OrderDetail_ViewController
@@ -47,59 +46,37 @@
     [self.navigationItem setTitleView:self.segmentControl];
     [self.view addSubview:self.headerView];
     [self.view addSubview:self.scrollView];
+    
+    
+    WS(weakSelf);
+    [[ProfitWeiTuoChiCangHelper shareHelper] setGetProfitWeiTuoChiCangBlock:^(Heyue_OrderInfo_Model * _Nonnull profitModel, NSArray * _Nonnull weituoArray, NSArray * _Nonnull chicangArray)
+    {
+        [weakSelf.headerView setModel:profitModel];
+        [weakSelf.weituoVC setItemArry:chicangArray];
+        [weakSelf.chicangVC setItemArry:weituoArray];
+    }];
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-
 }
 
 
 
-- (void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
-    [self startRuntimer];
 }
 
 -(void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    [self stopRuntimer];
 }
 
 
-#pragma mark 开启定时器
--(void)startRuntimer
-{
-    [self stopRuntimer];
-    // 这里的target又发生了变化
-    self.timer = [NSTimer timerWithTimeInterval:5.0 target:[LJWeakProxy proxyWithTarget:self] selector:@selector(timerRefreash:) userInfo:nil repeats:YES];
-    [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];
-    [self.timer fire];
-}
 
 
-#pragma mark 关闭定时器
--(void)stopRuntimer
-{
-    [self.timer invalidate];
-    self.timer = nil;
-}
-
-
--(void)timerRefreash:(NSTimer *)timer
-{
-    if (kLogin)
-    {
-        [self request_Tongji_URL];
-        NSLog(@"定时器获取浮动盈亏");
-    }
-    else
-    {
-        [self stopRuntimer];
-    }
-}
 
 
 #pragma mark - Getter / Setter
@@ -116,29 +93,12 @@
 - (void)ninaCurrentPageIndex:(NSInteger)currentPage currentObject:(id)currentObject lastObject:(id)lastObject
 {
     
-    switch (currentPage) {
-        case 0:
-        {
-            [self.chicangVC startRuntimer];
-            [self.weituoVC stopRuntimer];
-        }
-            break;
-        case 1:
-        {
-            [self.weituoVC startRuntimer];
-            [self.chicangVC stopRuntimer];
-        }
-            break;
+    switch (currentPage)
+    {
         case 2:
         {
-            [self.chicangVC stopRuntimer];
-            [self.weituoVC stopRuntimer];
             [self.chengjiaoVC beginrefreashData];
         }
-            break;
-            
-            
-        default:
             break;
     }
 }
@@ -185,11 +145,9 @@
         [self addChildViewController:self.chicangVC];
         [self.scrollView addSubview:self.chicangVC.view];
         self.chicangVC.view.frame = CGRectMake(ScreenWidth, 0, ScreenWidth, self.scrollView.height);
-        WS(weakSelf);
-        self.chicangVC.updateBlock = ^(NSArray * array) {
-            [weakSelf.headerView updateWith:array];
-        };
 
+        
+        
         //成交
         self.chengjiaoVC = [[Heyue_CengJiao_Order_VC alloc]init];
         [self.scrollView addSubview:self.chengjiaoVC.view];
@@ -200,26 +158,8 @@
     return _scrollView;
 }
 
-#pragma mark -- 网络请求 浮动盈亏 爆仓率 --
-- (void)request_Tongji_URL
-{
-    
-    //Heyue_Tongji_Api
-    [[WLHttpManager shareManager] requestWithURL_HTTPCode:URL_HEYUE_Info_URL RequestType:RequestTypeGet Parameters:nil Success:^(NSInteger statusCode, id responseObject) {
-        WL_Network_Model *netModel = [WL_Network_Model mj_objectWithKeyValues:responseObject];
-        if (netModel.status.integerValue == 200) {
-            Heyue_OrderInfo_Model *model = [Heyue_OrderInfo_Model mj_objectWithKeyValues:netModel.data];
-            
-            [self.headerView initDataWithOrderInfoModel:model];
-            
-            
-        }else{
-            [MBProgressHUD showError:netModel.msg];
-        }
-        
-    } Failure:^(NSError *error, NSInteger statusCode, id responseObject) {
-    }];
-}
+
+
 
 
 #pragma mark - scroll delegate
@@ -234,35 +174,17 @@
     self.segmentControl.selectedIndex = offset.x/ScreenWidth;
     
     [self setCurrentIndex:self.segmentControl.selectedIndex];
-
 }
 
 
 -(void)setCurrentIndex:(NSInteger)index
 {
-    switch (index) {
-        case 0:
-        {
-            [self.chicangVC startRuntimer];
-            [self.weituoVC stopRuntimer];
-        }
-            break;
-        case 1:
-        {
-            [self.weituoVC startRuntimer];
-            [self.chicangVC stopRuntimer];
-        }
-            break;
+    switch (index)
+    {
         case 2:
         {
-            [self.chicangVC stopRuntimer];
-            [self.weituoVC stopRuntimer];
             [self.chengjiaoVC beginrefreashData];
         }
-            break;
-            
-            
-        default:
             break;
     }
 }

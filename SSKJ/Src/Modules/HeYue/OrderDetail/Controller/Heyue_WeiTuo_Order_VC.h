@@ -13,14 +13,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Heyue_WeiTuo_Order_VC : SSKJ_BaseViewController
 
-#pragma mark 关闭定时器
 
-/// 关闭定时器
--(void)stopRuntimer;
+-(void)setItemArry:(NSArray*)array;
 
-#pragma mark 开启定时器
-/// 开启定时器
--(void)startRuntimer;
+
 
 
 @end

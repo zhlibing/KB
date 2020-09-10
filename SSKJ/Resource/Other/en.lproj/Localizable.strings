@@ -1,4 +1,5 @@
 
+"banner_default"="banner_en";
 "初级未认证"="Junior uncertified";
 "初级认证"="Primary certification";
 "高级认证待审核"="Advanced certification pending";
@@ -580,3 +581,4 @@
 "最新版本"="Latest version";
 "保存"="Save";
 "当前为最新版本"="Currently the latest version";
+"邀请你加入，长按识别二维码"="Invite you to join, long press to identify the QR code";

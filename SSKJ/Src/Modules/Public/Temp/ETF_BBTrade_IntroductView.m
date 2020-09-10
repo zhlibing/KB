@@ -32,7 +32,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = kBgColor;
+        [self setBackgroundColor:UIColorFromRGB(0x131E31)];
         [self addSubview:self.coinNameLabel];
         
         [self addSubview:self.timeTitleLabel];
@@ -58,7 +58,7 @@
 -(UILabel *)coinNameLabel
 {
     if (nil == _coinNameLabel) {
-        _coinNameLabel = [WLTools allocLabel:@"" font:systemBoldFont(ScaleW(20)) textColor:kTitleColor frame:CGRectMake(ScaleW(18), ScaleW(26), ScreenWidth - ScaleW(36), ScaleW(20)) textAlignment:NSTextAlignmentLeft];
+        _coinNameLabel = [WLTools allocLabel:@"" font:systemBoldFont(ScaleW(20)) textColor:kWhiteColor frame:CGRectMake(ScaleW(18), ScaleW(26), ScreenWidth - ScaleW(36), ScaleW(20)) textAlignment:NSTextAlignmentLeft];
     }
     return _coinNameLabel;
 }
@@ -74,7 +74,7 @@
 -(UILabel *)timeLabel
 {
     if (nil == _timeLabel) {
-        _timeLabel = [WLTools allocLabel:@"2019/01/01" font:self.timeTitleLabel.font textColor:kTitleColor frame:CGRectMake(ScreenWidth - ScaleW(18) - ScaleW(200), self.timeTitleLabel.y, ScaleW(200), self.timeTitleLabel.height) textAlignment:NSTextAlignmentRight];
+        _timeLabel = [WLTools allocLabel:@"2019/01/01" font:self.timeTitleLabel.font textColor:kWhiteColor frame:CGRectMake(ScreenWidth - ScaleW(18) - ScaleW(200), self.timeTitleLabel.y, ScaleW(200), self.timeTitleLabel.height) textAlignment:NSTextAlignmentRight];
     }
     return _timeLabel;
 }
@@ -92,7 +92,7 @@
 -(UILabel *)faxingLabel
 {
     if (nil == _faxingLabel) {
-        _faxingLabel = [WLTools allocLabel:@"1000万" font:self.timeTitleLabel.font textColor:kTitleColor frame:CGRectMake(self.timeLabel.x, self.faxingTitleLabel.y, ScaleW(200), self.timeTitleLabel.height) textAlignment:NSTextAlignmentRight];
+        _faxingLabel = [WLTools allocLabel:@"1000万" font:self.timeTitleLabel.font textColor:kWhiteColor frame:CGRectMake(self.timeLabel.x, self.faxingTitleLabel.y, ScaleW(200), self.timeTitleLabel.height) textAlignment:NSTextAlignmentRight];
     }
     return _faxingLabel;
 }
@@ -109,7 +109,7 @@
 -(UILabel *)liutongLabel
 {
     if (nil == _liutongLabel) {
-        _liutongLabel = [WLTools allocLabel:@"2019/01/01" font:self.timeTitleLabel.font textColor:kTitleColor frame:CGRectMake(self.timeLabel.x, self.liutongTitleLabel.y, ScaleW(200), self.timeTitleLabel.height) textAlignment:NSTextAlignmentRight];
+        _liutongLabel = [WLTools allocLabel:@"2019/01/01" font:self.timeTitleLabel.font textColor:kWhiteColor frame:CGRectMake(self.timeLabel.x, self.liutongTitleLabel.y, ScaleW(200), self.timeTitleLabel.height) textAlignment:NSTextAlignmentRight];
     }
     return _liutongLabel;
 }
@@ -126,7 +126,7 @@
 -(UILabel *)bookLabel
 {
     if (nil == _bookLabel) {
-        _bookLabel = [WLTools allocLabel:@"" font:self.timeTitleLabel.font textColor:kTitleColor frame:CGRectMake(ScreenWidth - ScaleW(18) - ScaleW(300), self.bookTitleLabel.y, ScaleW(300), self.timeTitleLabel.height) textAlignment:NSTextAlignmentRight];
+        _bookLabel = [WLTools allocLabel:@"" font:self.timeTitleLabel.font textColor:kWhiteColor frame:CGRectMake(ScreenWidth - ScaleW(18) - ScaleW(300), self.bookTitleLabel.y, ScaleW(300), self.timeTitleLabel.height) textAlignment:NSTextAlignmentRight];
     }
     return _bookLabel;
 }
@@ -134,7 +134,7 @@
 -(UILabel *)memoLabel
 {
     if (nil == _memoLabel) {
-        _memoLabel = [WLTools allocLabel:@"" font:systemFont(ScaleW(13)) textColor:kTitleColor frame:CGRectMake(ScaleW(15), self.bookLabel.bottom + ScaleW(20), ScreenWidth - ScaleW(30), 0) textAlignment:NSTextAlignmentLeft];
+        _memoLabel = [WLTools allocLabel:@"" font:systemFont(ScaleW(13)) textColor:kWhiteColor frame:CGRectMake(ScaleW(15), self.bookLabel.bottom + ScaleW(20), ScreenWidth - ScaleW(30), 0) textAlignment:NSTextAlignmentLeft];
         _memoLabel.numberOfLines = 0;
     }
     return _memoLabel;

@@ -37,7 +37,7 @@
     
     for (int i = 0; i < array.count; i++) {
         NSString *title = array[i];
-        UILabel *label = [WLTools allocLabel:title font:systemFont(ScaleW(13)) textColor:kTitleColor frame:CGRectMake(ScaleW(15) + i * width, 0, width, self.height) textAlignment:NSTextAlignmentLeft];
+        UILabel *label = [WLTools allocLabel:title font:systemFont(ScaleW(13)) textColor:kWhiteColor frame:CGRectMake(ScaleW(15) + i * width, 0, width, self.height) textAlignment:NSTextAlignmentLeft];
         NSTextAlignment aligment;
         if (i == 0) {
             aligment = NSTextAlignmentLeft;

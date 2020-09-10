@@ -142,8 +142,8 @@
             filePath = "SSKJ/Src/Modules/HeYue/HeYueRoot/Controller/HEYue_ViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "611"
-            endingLineNumber = "611"
+            startingLineNumber = "615"
+            endingLineNumber = "615"
             landmarkName = "-hasCurrentModel:"
             landmarkType = "7">
          </BreakpointContent>
@@ -183,38 +183,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "D9DBBF6D-98E5-46DD-BFD8-169FFDA0FDFA"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SSKJ/Src/Modules/Login/Controller/RegisterViewController.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "559"
-            endingLineNumber = "559"
-            landmarkName = "-requestRegisterUrl"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "4C278C17-AAB4-42E0-8112-D5859ED37396"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SSKJ/Src/Modules/Login/Controller/RegisterViewController.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "597"
-            endingLineNumber = "597"
-            landmarkName = "-requestRegisterUrl"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "492F5A08-9B32-4973-939D-A6859C08F0D0"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -225,38 +193,6 @@
             startingLineNumber = "26"
             endingLineNumber = "26"
             landmarkName = "-viewDidLoad"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "8818E880-39ED-4EA1-990D-5864966680DF"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SSKJ/Src/Modules/HeYue/KLine/Controller/HeYue_KlineViewController.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "665"
-            endingLineNumber = "665"
-            landmarkName = "-socketDidReciveData:identifier:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "2F8C17E7-416C-498F-8A5A-1929689273B0"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SSKJ/Src/Modules/HeYue/KLine/Controller/HeYue_KlineViewController.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "662"
-            endingLineNumber = "662"
-            landmarkName = "-socketDidReciveData:identifier:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -289,22 +225,6 @@
             startingLineNumber = "128"
             endingLineNumber = "128"
             landmarkName = "-loadUserInfo"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "36E9A845-FE27-4447-AEF7-CB5F636B0F59"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SSKJ/Src/Modules/HeYue/OrderDetail/Controller/Heyue_ChiCang_Order_VC.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "249"
-            endingLineNumber = "249"
-            landmarkName = "-headerRefresh"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -14,9 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Heyue_orderDetail_headerView : UIView
 
-- (void)initDataWithOrderInfoModel:(Heyue_OrderInfo_Model *)model;
+@property (nonatomic, strong) Heyue_OrderInfo_Model *model;
 
-- (void)updateWith:(NSArray *)array;
 @end
 
 NS_ASSUME_NONNULL_END

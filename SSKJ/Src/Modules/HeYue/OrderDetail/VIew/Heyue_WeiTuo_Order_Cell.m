@@ -45,15 +45,6 @@
 @property(nonatomic,strong)UILabel *baozhengjinPriceLabel;
 
 
-////过夜费
-//@property(nonatomic,strong)UILabel *guoyefeiLabelTitle;
-//@property(nonatomic,strong)UILabel *guoyefeiLabelLabel;
-////止盈价格
-//@property(nonatomic,strong)UILabel *zhiyingpriceTitle;
-//@property(nonatomic,strong)UILabel *zhiyingpriceLabel;
-////止损价格
-//@property(nonatomic,strong)UILabel *zhisunPriceTitle;
-//@property(nonatomic,strong)UILabel *zhisunPriceLabel;
 
 //分割线
 @property(nonatomic,strong)UIView *lineView;
@@ -279,7 +270,7 @@
 - (UIView *)lineView{
     if (_lineView == nil) {
         _lineView = [[UIView alloc]init];
-        _lineView.backgroundColor = kBgColor;
+        _lineView.backgroundColor = kLineColor;
     }
     return _lineView;
 }

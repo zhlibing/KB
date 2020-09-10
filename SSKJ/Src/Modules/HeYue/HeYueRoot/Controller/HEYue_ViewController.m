@@ -195,11 +195,6 @@ static NSString * NodataCellID = @"NodataCell";
 
     self.sectionView.allOrderBtn.hidden = !kLogin;
     self.sectionView.imageView.hidden = !kLogin;
-
-    
-    
-//    [self.tableView.mj_header beginRefreshing];
-
     [self refreshCodeDate];
 }
 
@@ -231,8 +226,6 @@ static NSString * NodataCellID = @"NodataCell";
     }
     
     self.headerView.model = self.model;
-    //委托单请求
-    [self requestWeiTuoOrder_URL_Pull];
     //获取币种资料（杠杆倍数）
     [self requestGetLeverageURLURL];
     //深度
@@ -242,9 +235,19 @@ static NSString * NodataCellID = @"NodataCell";
 
     //开启推送
     [self openSocket];
-    [self requestWeiTuoOrder_URL_Pull];
     [self.headerView changeUI];
 }
+
+
+
+-(void)setItemArray:(NSArray*)array
+{
+    [self.dataSource setArray:array];
+    [self.tableView reloadData];
+}
+
+
+
 
 -(ManagerSocket *)coinSocket
 {
@@ -429,12 +432,13 @@ static NSString * NodataCellID = @"NodataCell";
 
 
 //下拉刷新
-- (void)refreshHeader{
-
-    [self requestWeiTuoOrder_URL_Pull];
-
+- (void)refreshHeader
+{
     [self requestGetLeverageURLURL];
 }
+
+
+
 
 - (HeYue_Root_HeaderView *)headerView{
     if (_headerView == nil) {
@@ -727,13 +731,16 @@ static NSString * NodataCellID = @"NodataCell";
     }];
 }
 
-#pragma mark -- 委托单请求 --
-- (void)requestWeiTuoOrder_URL_Pull{
-    if (!kLogin) {
+#pragma mark 委托单请求
+- (void)requestWeiTuoOrder_URL_Pull
+{
+    if (!kLogin)
+    {
         [self endRefresh];
         return;
     }
-    if (!self.model.code.length) {
+    if (!self.model.code.length)
+    {
         [self endRefresh];
         return;
     }
@@ -747,15 +754,13 @@ static NSString * NodataCellID = @"NodataCell";
     //Heyue_Weituo_Api
     [[WLHttpManager shareManager] requestWithURL_HTTPCode:URL_HEYUE_List_URL RequestType:RequestTypeGet Parameters:params Success:^(NSInteger statusCode, id responseObject) {
         WL_Network_Model *netModel = [WL_Network_Model mj_objectWithKeyValues:responseObject];
-        if (netModel.status.integerValue == 200) {
+        if (netModel.status.integerValue == 200)
+        {
             [weakSelf handleExchangeListWithModel:netModel];
-
-        }else{
         }
         [weakSelf endRefresh];
-
-        
-    } Failure:^(NSError *error, NSInteger statusCode, id responseObject) {
+    } Failure:^(NSError *error, NSInteger statusCode, id responseObject)
+    {
         [weakSelf endRefresh];
     }];
 }
@@ -764,13 +769,13 @@ static NSString * NodataCellID = @"NodataCell";
 {
     
     NSMutableArray *array = [Heyue_OrderDdetail_Model mj_objectArrayWithKeyValuesArray:net_model.data[@"data"]];
-    
-    [self.dataSource removeAllObjects];
-    [self.dataSource addObjectsFromArray:array];
+    [self.dataSource setArray:array];
 
     [self.tableView reloadData];
-
 }
+
+
+
 -(void)endRefresh
 {
     if (self.tableView.mj_header.state == MJRefreshStateRefreshing) {
@@ -794,9 +799,12 @@ static NSString * NodataCellID = @"NodataCell";
     [[WLHttpManager shareManager] requestWithURL_HTTPCode:URL_HEYUE_RevokeOrder_URL RequestType:RequestTypePost Parameters:params Success:^(NSInteger statusCode, id responseObject) {
         [hud hideAnimated:YES];
         WL_Network_Model *netModel = [WL_Network_Model mj_objectWithKeyValues:responseObject];
-        if (netModel.status.integerValue == 200) {
+        if (netModel.status.integerValue == 200)
+        {
             [self requestWeiTuoOrder_URL_Pull];
-        }else{
+        }
+        else
+        {
             [MBProgressHUD showError:netModel.msg];
         }
     } Failure:^(NSError *error, NSInteger statusCode, id responseObject) {

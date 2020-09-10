@@ -98,7 +98,7 @@ alpha:a]
 /**
  分割线色
  */
-#define kLineColor UIColorFromRGB(0xEEEEEE)
+#define kLineColor UIColorFromRGB(0xE6E6E6)
 
 /**
  浅色分割线

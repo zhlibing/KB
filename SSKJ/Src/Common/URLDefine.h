@@ -454,6 +454,10 @@
 //平仓 ATEX
 #define URL_HEYUE_Done_URL [NSString stringWithFormat:@"%@%@",ProductBaseServer,@"/api/contract/closePosition"]
 
+//盈亏  持仓  委托  三合一接口
+#define URL_Userdatas_URL [NSString stringWithFormat:@"%@%@",ProductBaseServer,@"/api/contract/userdatas"]
+
+
 //一键平仓 ATEX
 #define URL_HEYUE_DoneAll_URL [NSString stringWithFormat:@"%@%@",ProductBaseServer,@"/api/contract/allClosePosition"]
 
@@ -525,4 +529,6 @@
 #define URL_RechargeNum_URL [NSString stringWithFormat:@"%@%@",ProductBaseServer,@"/app/user/getMinInCoin"]
 
 
+//分享链接 bmcoin
+#define URL_ShareLink_URL [NSString stringWithFormat:@"%@%@",ProductBaseServer,@"/api/software/downloadLink"]
 

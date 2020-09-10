@@ -101,55 +101,43 @@ static NSString *marketSocketIdentifier = @"maekSocketIdentifier";
     [super viewDidLoad];
     
     
-    if (!self.coinModel.code.length) {
+    if (!self.coinModel.code.length)
+    {
         self.coinModel.code = @"BTC/USDT";
     }
-//    self.title = self.coinModel.code;
+
     
     
-//    self.title = SSKJLanguage(@"合约");
-//    UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [backBtn setImage:[UIImage imageNamed:@"mine_fanhui"] forState:UIControlStateNormal];
-//    [backBtn setTitle:[NSString stringWithFormat:@" %@", self.coinModel.code] forState:UIControlStateNormal];
-//    [backBtn setTitleColor:kTitleColor forState:UIControlStateNormal];
-//    [backBtn addTarget:self action:@selector(backClick) forControlEvents:UIControlEventTouchUpInside];
-//    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
-//    self.navigationItem.leftBarButtonItem = item;
     
-    //Changed
-    UIView *contentView = [UIView new];
-    contentView.frame = CGRectMake(0, 0, ScreenWidth, ScaleW(44));
-//    UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [backBtn setImage:[UIImage imageNamed:@"mine_fanhui"] forState:UIControlStateNormal];
-//    [backBtn addTarget:self action:@selector(backClick) forControlEvents:UIControlEventTouchUpInside];
-//    backBtn.frame = CGRectMake(0, 6, ScaleW(32), ScaleW(32));
-//    [contentView addSubview:backBtn];
+    UIView *contentView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, Height_NavBar)];
+    [contentView setBackgroundColor:UIColorFromRGB(0x131E31)];
+    [self.view addSubview:contentView];
     
-    UIView *lineView = [UIView new];
-    lineView.frame = CGRectMake(ScaleW(0), contentView.centerY - ScaleW(8), ScaleW(1), ScaleW(16));
-    lineView.backgroundColor = kSubTitleColor;
-    [contentView addSubview:lineView];
+    
+    UIButton *backBtn = [[UIButton alloc]initWithFrame:CGRectMake(15, Height_NavBar-40, 20, 20)];
+    [backBtn setImage:[UIImage imageNamed:@"mine_hack"] forState:UIControlStateNormal];
+    [backBtn addTarget:self action:@selector(backClick) forControlEvents:UIControlEventTouchUpInside];
+    [contentView addSubview:backBtn];
+    
+    
     
     SPButton *swcBtn = [[SPButton alloc] initWithImagePosition:SPButtonImagePositionLeft];
     swcBtn.imageTitleSpace = ScaleW(12.5);
     
     swcBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [swcBtn setImage:[UIImage imageNamed:@"hy_unShow"] forState:UIControlStateNormal];
-    NSArray *array = [[self.coinModel.code uppercaseString] componentsSeparatedByString:@"_"];
-    NSString *str;
+    [swcBtn setImage:[UIImage imageNamed:@"showCode"] forState:UIControlStateNormal];
     [swcBtn setTitle:self.coinModel.code forState:UIControlStateNormal];
 
-    [swcBtn setTitleColor:kTitleColor forState:UIControlStateNormal];
+    [swcBtn setTitleColor:kWhiteColor forState:UIControlStateNormal];
     [swcBtn addTarget:self action:@selector(leftClick) forControlEvents:UIControlEventTouchUpInside];
-    swcBtn.frame = CGRectMake(lineView.right + ScaleW(19.5), ScaleW(6), ScaleW(280), ScaleW(32));
+    swcBtn.frame = CGRectMake(backBtn.right + ScaleW(19.5), 0, ScaleW(280), ScaleW(32));
+    [swcBtn setCenterY:backBtn.centerY];
     [contentView addSubview:swcBtn];
     self.titleBtn = swcBtn;
-    self.navigationItem.titleView = contentView;
-
     self.typeString = @"minute";
     [self setUI];
-    
 }
+
 
 - (void)leftClick {
     //是否是时间合约
@@ -165,6 +153,9 @@ static NSString *marketSocketIdentifier = @"maekSocketIdentifier";
     [self cw_showDrawerViewController:vc animationType:CWDrawerAnimationTypeDefault configuration:config];
 }
 
+
+
+
 #pragma mark - 更新币种
 - (void)refreshCodeDate{
     
@@ -173,7 +164,9 @@ static NSString *marketSocketIdentifier = @"maekSocketIdentifier";
     
 }
 
-- (void)backClick{
+
+- (void)backClick
+{
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -190,17 +183,20 @@ static NSString *marketSocketIdentifier = @"maekSocketIdentifier";
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [self setNavigationBarHidden:YES];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(applicationDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(applicationDidEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
 
     [self updatePageInfo];
+    
+    
 }
 
 
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    [self setNavigationBarHidden:NO];
     [[NSNotificationCenter defaultCenter]removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter]removeObserver:self name:UIApplicationDidEnterBackgroundNotification object:nil];
 
@@ -210,7 +206,8 @@ static NSString *marketSocketIdentifier = @"maekSocketIdentifier";
 #pragma mark - 更新页面信息
 - (void)updatePageInfo{
     
-    if (!self.coinModel.code.length) {
+    if (!self.coinModel.code.length)
+    {
         return;
     }
     NSArray *array = [self.coinModel.code componentsSeparatedByString:@"/"];
@@ -562,7 +559,6 @@ static NSString *marketSocketIdentifier = @"maekSocketIdentifier";
          [hud hideAnimated:YES];
 
          WL_Network_Model *network_Model=[WL_Network_Model mj_objectWithKeyValues:responseObject];
-//         [CMRemind dismiss];
          if (network_Model.status.integerValue == SUCCESSED)
          {
              weakSelf.kLineDataArray=network_Model.data;
@@ -746,7 +742,7 @@ static NSString *marketSocketIdentifier = @"maekSocketIdentifier";
 -(void)setUI
 {
     
-    self.view.backgroundColor = kBgColor;
+    [self.view setBackgroundColor:UIColorFromRGB(0x131E31)];
     [self.view addSubview:self.scrollView];
     [self.scrollView addSubview:self.headerView];
     [self.scrollView addSubview:self.segmentControl];
@@ -767,11 +763,13 @@ static NSString *marketSocketIdentifier = @"maekSocketIdentifier";
 
 -(UIScrollView *)scrollView
 {
-    if (nil == _scrollView) {
+    if (nil == _scrollView)
+    {
         CGFloat bottomH = ScaleW(65);
         _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, Height_NavBar, ScreenWidth, ScreenHeight - bottomH - Height_NavBar)];
-        _scrollView.backgroundColor = kBgColor;
-        if (@available(iOS 11.0, *)) {
+        [_scrollView setBackgroundColor:UIColorFromRGB(0x131E31)];
+        if (@available(iOS 11.0, *))
+        {
             _scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
         }
     }
@@ -783,7 +781,9 @@ static NSString *marketSocketIdentifier = @"maekSocketIdentifier";
 {
     if (nil == _headerView) {
         _headerView = [[ETF_BBTrade_TableHeaderView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScaleW(105))];
+        [_headerView setBackgroundColor:UIColorFromRGB(0x131E31)];
         _headerView.coinModel = self.coinModel;
+        
     }
     return _headerView;
 }
@@ -791,19 +791,18 @@ static NSString *marketSocketIdentifier = @"maekSocketIdentifier";
 
 -(ETF_BBTrade_SegmentControl *)segmentControl
 {
-    if (nil == _segmentControl) {
+    if (nil == _segmentControl)
+    {
         NSMutableArray *titles = [NSMutableArray array];
-        for (kLineTypeModel *model in self.kLineTypeAarray) {
+        for (kLineTypeModel *model in self.kLineTypeAarray)
+        {
             [titles addObject:model.title];
         }
         [titles addObject:SSKJLanguage(@"更多")];
         [titles addObject:SSKJLanguage(@"指标")];
         
-        _segmentControl = [[ETF_BBTrade_SegmentControl alloc]initWithFrame:CGRectMake(0, self.headerView.bottom, ScreenWidth, ScaleW(45)) titles:titles normalColor:kTitleColor selectedColor:kBlueColor fontSize:ScaleW(13)];
-        _segmentControl.backgroundColor = kBgColor;
-        UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(ScaleW(15), 0, _segmentControl.width -ScaleW(30), 1)];
-        lineView.backgroundColor = kSubBgColor;
-        [_segmentControl addSubview:lineView];
+        _segmentControl = [[ETF_BBTrade_SegmentControl alloc]initWithFrame:CGRectMake(0, self.headerView.bottom, ScreenWidth, ScaleW(45)) titles:titles normalColor:UIColorFromRGB(0x8E94A3) selectedColor:kWhiteColor fontSize:ScaleW(13)];
+        [_segmentControl setBackgroundColor:UIColorFromRGB(0x131E31)];
         WS(weakSelf);
         _segmentControl.selectedIndexBlock = ^(NSInteger index) {
             [weakSelf segmentSelectIndex:index];
@@ -838,11 +837,15 @@ static NSString *marketSocketIdentifier = @"maekSocketIdentifier";
 
 -(LXY_KLineView *)kLineView
 {
-    if (nil == _kLineView) {
-        _kLineView = [[LXY_KLineView alloc]initWithFrame:CGRectMake(0, self.segmentControl.bottom + ScaleW(3), ScreenWidth, ScaleW(328)) accessoryType:LXY_ACCESSORYTYPENONE mainAccessoryType:LXY_KMAINACCESSORYTYPEMA];
+    if (nil == _kLineView)
+    {
+        _kLineView = [[LXY_KLineView alloc]initWithFrame:CGRectMake(0, self.segmentControl.bottom + ScaleW(3), ScreenWidth+120, ScaleW(500)) accessoryType:LXY_ACCESSORYTYPENONE mainAccessoryType:LXY_KMAINACCESSORYTYPEMA];
+
     }
     return _kLineView;
 }
+
+
 
 -(ETF_BBTrade_IntroductHeaderView *)introductHeaderView
 {
@@ -888,6 +891,7 @@ static NSString *marketSocketIdentifier = @"maekSocketIdentifier";
     
     if (!_depthView) {
         _depthView = [[STO_BB_DepthView alloc] initWithFrame:CGRectMake(0, self.introductHeaderView.bottom, ScreenWidth, ScaleW(250))];
+        
     }
     return _depthView;
 }

@@ -13,18 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Heyue_ChiCang_Order_VC : SSKJ_BaseViewController
 
-
-
-#pragma mark 关闭定时器
--(void)stopRuntimer;
-#pragma mark 开启定时器
--(void)startRuntimer;
-
-
-
-@property (nonatomic,copy)void(^updateBlock)(NSArray *);
-
-
+-(void)setItemArry:(NSArray*)array;
 
 @end
 
