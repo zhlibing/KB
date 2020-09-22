@@ -52,9 +52,9 @@
 
 @implementation Mine_Extract_ViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     
     self.title = SSKJLocalized(@"提币", nil);
     [self addRightNavgationItemWithImage:[UIImage imageNamed:@"Recharge"]];
@@ -589,10 +589,6 @@
         return;
     }
     
-    if (self.numberTextField.text.doubleValue + self.infoModel.fee.doubleValue > self.infoModel.balance.doubleValue) {
-        [MBProgressHUD showError:SSKJLocalized(@"余额不足", nil)];
-        return;
-    }
     
     if (self.pwdTextField.text.length  == 0)
     {
@@ -665,15 +661,7 @@
 {
     self.numberTextField.text = [self deleteFirstZero:self.numberTextField.text];
     
-    double shijiNumber = (self.numberTextField.text.doubleValue - self.infoModel.fee.doubleValue);
-    
-    if (shijiNumber < 0)
-    {
-        shijiNumber = 0;
-    }
-    
-    
-    NSString *shijiString = [WLTools noroundingStringWith:shijiNumber afterPointNumber:2];
+    NSString *shijiString = self.numberTextField.text;
     
     NSString *string = [NSString stringWithFormat:SSKJLocalized(@"到账数量:%@ USDT", nil),shijiString];
     

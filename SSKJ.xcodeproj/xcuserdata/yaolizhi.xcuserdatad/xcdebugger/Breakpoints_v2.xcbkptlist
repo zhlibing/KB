@@ -46,8 +46,8 @@
             filePath = "SSKJ/Src/Modules/Mine/Assets/TiBi/Mine_Extract_ViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "709"
-            endingLineNumber = "709"
+            startingLineNumber = "697"
+            endingLineNumber = "697"
             landmarkName = "-requestExtractWithCode:"
             landmarkType = "7">
          </BreakpointContent>
@@ -174,8 +174,8 @@
             filePath = "SSKJ/Src/Modules/Mine/Assets/TiBi/Mine_Extract_ViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "715"
-            endingLineNumber = "715"
+            startingLineNumber = "703"
+            endingLineNumber = "703"
             landmarkName = "-requestExtractWithCode:"
             landmarkType = "7">
          </BreakpointContent>
@@ -193,22 +193,6 @@
             startingLineNumber = "26"
             endingLineNumber = "26"
             landmarkName = "-viewDidLoad"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "F69AE412-89EA-4E81-9A96-E84A8666308E"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SSKJ/Src/Modules/Base/SSKJ_BaseViewController.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "248"
-            endingLineNumber = "248"
-            landmarkName = "-judgeFristCertificate"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -273,6 +257,22 @@
             startingLineNumber = "152"
             endingLineNumber = "152"
             landmarkName = "-setData:isLarge:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "386C1C4C-0BE5-437E-AF7E-16348AA8F2FC"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SSKJ/Src/Modules/Mine/Assets/TiBi/Mine_Extract_ViewController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "623"
+            endingLineNumber = "623"
+            landmarkName = "-requestExtractInfo"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
