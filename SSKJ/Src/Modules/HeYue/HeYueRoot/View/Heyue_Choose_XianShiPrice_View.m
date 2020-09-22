@@ -33,8 +33,10 @@
     return self;
 }
 
-- (UIButton *)shijiaBtn{
-    if (_shijiaBtn == nil) {
+- (UIButton *)shijiaBtn
+{
+    if (_shijiaBtn == nil)
+    {
         _shijiaBtn = [WLTools allocButton:SSKJLocalized(@"市价交易", nil) textColor:kTitleColor nom_bg:nil hei_bg:nil frame:CGRectMake(ScaleW(0), 0, self.width, self.height/2)];
         _shijiaBtn.backgroundColor = kWhiteColor;
         _shijiaBtn.titleLabel.font = systemFont(ScaleW(14));
@@ -43,17 +45,21 @@
     return _shijiaBtn;
 }
 
-- (UIView *)lineView{
-    if (_lineView == nil) {
+- (UIView *)lineView
+{
+    if (_lineView == nil)
+    {
         _lineView = [[UIView alloc]initWithFrame:CGRectMake(ScaleW(10), ScaleW(45), ScaleW(110), ScaleW(1))];
-        _lineView.backgroundColor = kBgColor;
+        _lineView.backgroundColor = kLineColor;
         _lineView.hidden = YES;
     }
     return _lineView;
 }
 
-- (UIButton *)xianjiaBtn{
-    if (_xianjiaBtn == nil) {
+- (UIButton *)xianjiaBtn
+{
+    if (_xianjiaBtn == nil)
+    {
         _xianjiaBtn = [WLTools allocButton:SSKJLocalized(@"限价交易", nil) textColor:kTitleColor nom_bg:nil hei_bg:nil frame:CGRectMake(ScaleW(0), _shijiaBtn.bottom, self.width, self.height/2)];
         _xianjiaBtn.backgroundColor = kWhiteColor;
         _xianjiaBtn.titleLabel.font = systemFont(ScaleW(14));
@@ -62,24 +68,20 @@
     return _xianjiaBtn;
 }
 
-- (void)shijiaBtnAction{
-    if (self.ShiXianPriceBlock) {
+- (void)shijiaBtnAction
+{
+    if (self.ShiXianPriceBlock)
+    {
         self.ShiXianPriceBlock(SSKJLocalized(@"市价交易", nil), 1);
     }
 }
 
-- (void)xianjiaBtnAction{
-    if (self.ShiXianPriceBlock) {
+- (void)xianjiaBtnAction
+{
+    if (self.ShiXianPriceBlock)
+    {
         self.ShiXianPriceBlock(SSKJLocalized(@"限价交易", nil), 2);
     }
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
 
 @end

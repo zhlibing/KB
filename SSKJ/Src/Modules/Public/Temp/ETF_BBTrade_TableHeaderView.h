@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "SSKJ_Market_Index_Model.h"
-
 #import "LXY_KLine_DataModel.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ETF_BBTrade_TableHeaderView : UIView

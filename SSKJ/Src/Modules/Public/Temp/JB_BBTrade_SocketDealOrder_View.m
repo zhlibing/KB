@@ -90,23 +90,23 @@ static NSString *cellid = @"JB_SocketDealOrder_Cell";
 
 -(void)setCoinModel:(SSKJ_Market_Index_Model *)coinModel
 {
-    _coinModel = coinModel;
-    [self.headerView setCoinModel:coinModel];
+    if (coinModel)
+    {
+        _coinModel = coinModel;
+        [self.headerView setCoinModel:coinModel];
+    }
 }
 
 -(void)setDataSource:(NSArray<JB_BBTrade_SocketDealOrder_Model *> *)dataSource
 {
-    _dataSource = dataSource;
-    [self.tableView reloadData];
-    self.tableView.height = ScaleW(37) * dataSource.count + ScaleW(40) + ScaleW(50);
-    self.height = self.tableView.height;
+    if ([dataSource count])
+    {
+        _dataSource = dataSource;
+        [self.tableView reloadData];
+        self.tableView.height = ScaleW(37) * dataSource.count + ScaleW(40) + ScaleW(50);
+        self.height = self.tableView.height;
+    }
+    
 }
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
 
 @end

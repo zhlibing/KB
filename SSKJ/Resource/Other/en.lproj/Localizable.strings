@@ -118,7 +118,7 @@
 "快捷买币" = "Quick buying";
 "行情" = "Quotation";
 "币种" = "currency";
-"最新价格" = "Latest price";
+"平仓价格" = "Close price";
 "筛选" = "screen";
 "订单状态" = "Order status";
 "未付款" = "Unpaid";
@@ -176,8 +176,9 @@
 "价格" = "Price";
 "深度" = "depth";
 "简介" = "brief introduction";
-"做多" = "Do long";
-"做空" = "Do short";
+"做多" = "Buy";
+"做空" = "Sell";
+"保存"="Save";
 "验证码" = "Verification Code";
 "隐私政策" = "Privacy clause";
 "服务协议" = "Service agreement";

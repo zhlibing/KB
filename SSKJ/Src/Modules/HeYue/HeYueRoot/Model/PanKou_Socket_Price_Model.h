@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,copy) NSString *totalSize;
 
+
 @end
 
 NS_ASSUME_NONNULL_END

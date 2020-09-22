@@ -152,7 +152,8 @@
 {
     [self tapEvent:nil];
     _isLarge = isLarge;
-    if (data) {
+    if (data)
+    {
         self.stockCode = data[@"code"];
         
         self.buyModelArray = [LXY_DeepModel mj_objectArrayWithKeyValuesArray:[[data[@"bids"]reverseObjectEnumerator] allObjects]];

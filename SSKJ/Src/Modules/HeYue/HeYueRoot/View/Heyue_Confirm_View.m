@@ -353,6 +353,8 @@
 }
 
 
+
+
 -(void)showWithData:(NSDictionary *)data
 
 {
@@ -369,9 +371,6 @@
     
     self.baozhengjinLabel.text = data[@"totalPrice"];
     self.leverageLabel.text = [NSString stringWithFormat:@"%@",data[@"leverage"]];
-//    self.shouxufeiLabel.text = data[@"shouxufei"];
-//    self.zhiyingLabel.text = data[@"zhiying"];
-//    self.zhisunLabel.text = data[@"zhisun"];
 
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
     

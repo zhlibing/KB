@@ -62,34 +62,36 @@ static NSString *cellid = @"STO_BB_DepthViewCell";
 
 -(void)setDeepData:(NSDictionary *)deepData
 {
-    [self.deepView setData:deepData isLarge:YES];
-//    deepData[@"code"]
-    NSArray *coin = [[deepData[@"code"] uppercaseString]  componentsSeparatedByString:@"_"];
-    self.headerBuyCoin.text = [NSString stringWithFormat:@"%@(%@)", SSKJLanguage(@"数量"), coin.firstObject];
-    self.headerSellCoin.text = [NSString stringWithFormat:@"%@(%@)", SSKJLanguage(@"数量"), coin.firstObject];
-    self.headerPriceCoin.text = [NSString stringWithFormat:@"%@(%@)", SSKJLanguage(@"价格"), coin.lastObject];
+    if (deepData.count)
+    {
+         [self.deepView setData:deepData isLarge:YES];
+            NSArray *coin = [[deepData[@"code"] uppercaseString]  componentsSeparatedByString:@"_"];
+            self.headerBuyCoin.text = [NSString stringWithFormat:@"%@(%@)", SSKJLanguage(@"数量"), coin.firstObject];
+            self.headerSellCoin.text = [NSString stringWithFormat:@"%@(%@)", SSKJLanguage(@"数量"), coin.firstObject];
+            self.headerPriceCoin.text = [NSString stringWithFormat:@"%@(%@)", SSKJLanguage(@"价格"), coin.lastObject];
 
-    NSArray *buyArray = [LXY_DeepModel mj_objectArrayWithKeyValuesArray:deepData[@"bids"]];
-    NSArray *sellArray = [LXY_DeepModel mj_objectArrayWithKeyValuesArray:deepData[@"asks"]];
-    NSInteger count = MIN(buyArray.count, sellArray.count);
-    count = MIN(count, 30);
-    
-    NSMutableArray *arr = [NSMutableArray arrayWithCapacity:count];
-    for (int i =0; i < count; i++) {
-        LXY_DeepModel *buy = buyArray[i];
-        LXY_DeepModel *sell = sellArray[i];
-        NSMutableDictionary *info = [NSMutableDictionary dictionary];
-        info[@"index"] = [NSString stringWithFormat:@"%d", i + 1];
-        NSString *code = deepData[@"code"];
+            NSArray *buyArray = [LXY_DeepModel mj_objectArrayWithKeyValuesArray:deepData[@"bids"]];
+            NSArray *sellArray = [LXY_DeepModel mj_objectArrayWithKeyValuesArray:deepData[@"asks"]];
+            NSInteger count = MIN(buyArray.count, sellArray.count);
+            count = MIN(count, 30);
+            
+            NSMutableArray *arr = [NSMutableArray arrayWithCapacity:count];
+            for (int i =0; i < count; i++) {
+                LXY_DeepModel *buy = buyArray[i];
+                LXY_DeepModel *sell = sellArray[i];
+                NSMutableDictionary *info = [NSMutableDictionary dictionary];
+                info[@"index"] = [NSString stringWithFormat:@"%d", i + 1];
+                NSString *code = deepData[@"code"];
 
-        
-        info[@"buyNum"] = [SSTool MarketPname:code num:buy.volume];
-        info[@"buyPrice"] = [SSTool MarketPname:code price:buy.price];
-        info[@"sellNum"] = [SSTool MarketPname:code num:sell.volume];
-        info[@"sellPrice"] = [SSTool MarketPname:code price:sell.price];
-        [arr addObject:info];
+                
+                info[@"buyNum"] = [SSTool MarketPname:code num:buy.volume];
+                info[@"buyPrice"] = [SSTool MarketPname:code price:buy.price];
+                info[@"sellNum"] = [SSTool MarketPname:code num:sell.volume];
+                info[@"sellPrice"] = [SSTool MarketPname:code price:sell.price];
+                [arr addObject:info];
+            }
+            self.array = [arr copy];
     }
-    self.array = [arr copy];
 }
 
 

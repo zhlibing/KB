@@ -16,10 +16,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,assign) NSInteger seletedIndex;
 
 
-#pragma mark 关闭定时器
--(void)stopRuntimer;
-#pragma mark 开启定时器
--(void)startRuntimer;
 
 
 @end

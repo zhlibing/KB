@@ -139,20 +139,25 @@
         
     UIColor *color;
 
-    if (![coinModel.changeRate hasPrefix:@"-"]) {
-        color = kMarketUp;
-        if (coinModel.changeRate.length > 0) {
-            self.rateLabel.text = [NSString stringWithFormat:@"+%@",coinModel.changeRate];
-        } else {
-            self.rateLabel.text = @"--";
-
-        }
-    }else{
+    if ([coinModel.changeRate hasPrefix:@"-"])
+    {
         color = kMarketDown;
 
         self.rateLabel.text = coinModel.changeRate;
     }
-    
+    else
+    {
+        color = kMarketUp;
+        if (coinModel.changeRate.length > 0)
+        {
+            self.rateLabel.text = [NSString stringWithFormat:@"+%@",coinModel.changeRate];
+        }
+        else
+        {
+            self.rateLabel.text = @"--";
+
+        }
+    }
     self.rateLabel.textColor = color;
     
     self.currentPricelabel.textColor = color;
@@ -166,12 +171,5 @@
     
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
 
 @end

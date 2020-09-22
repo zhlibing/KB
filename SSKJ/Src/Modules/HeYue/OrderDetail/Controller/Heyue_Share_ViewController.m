@@ -14,61 +14,162 @@
 @interface Heyue_Share_ViewController ()
 
 @property (nonatomic, strong) UIImageView *imageView;
-@property (nonatomic, strong) UILabel *messageLabel;
 
-@property (nonatomic, strong) UILabel * incomeTitleLabel;
+@property (nonatomic, strong) UILabel *incomeTitleLabel;
 @property (nonatomic, strong) UILabel *incomeLabel;
-
 @property (nonatomic, strong) UILabel *typeLabel;
-@property (nonatomic, strong) UILabel *openPriceLabel;
-@property (nonatomic, strong) UILabel *closePriceLabel;
 
-@property (nonatomic, strong) UIView *bottomBackView;
-@property (nonatomic, strong) UIImageView *logoImageView;
-@property (nonatomic, strong) UILabel *bottomLabel;
+@property (nonatomic, strong) UILabel *openTipLabel;
+@property (nonatomic, strong) UILabel *openPriceLabel;
+@property (nonatomic, strong) UILabel *numberTipLabel;
+@property (nonatomic, strong) UILabel *numberLabel;
+@property (nonatomic, strong) UILabel *codeTipLabel;
+@property (nonatomic, strong) UILabel *codeLabel;
+
+
+
 @property (nonatomic, strong) UIImageView *qrCodeImageView;
+
 @end
 
 @implementation Heyue_Share_ViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
-    self.view.backgroundColor = UIColorFromRGB(0x0d0d2a);
-    [self addRightNavItemWithTitle:SSKJLocalized(@"保存图片", nil) color:kWhiteColor font:systemFont(ScaleW(15))];
-    [self setTitleColor:kWhiteColor];
-    [self addLeftNavItemWithImage:[UIImage imageNamed:@"root_back_w"]];
-    [self setNavgationBackgroundColor:[UIColor whiteColor] alpha:1];
-    self.title = SSKJLocalized(@"分享", nil);
-    
     [self setUI];
+    UIButton *backBtn = [[UIButton alloc]initWithFrame:CGRectMake(15, Height_NavBar-40, 20, 20)];
+    [backBtn setImage:[UIImage imageNamed:@"mine_hack"] forState:UIControlStateNormal];
+    [backBtn addTarget:self action:@selector(backClick) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:backBtn];
+    
+    
+    
+    UIButton *saveBtn = [[UIButton alloc]initWithFrame:CGRectMake(ScreenWidth-55, backBtn.top, 40, 20)];
+    [saveBtn setTitle:SSKJLanguage(@"保存") forState:UIControlStateNormal];
+    [saveBtn addTarget:self action:@selector(rigthBtnAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:saveBtn];
+    
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self requestLink];
+    [self setNavigationBarHidden:YES];
+    /**
+     [self requestLink];
+     */
 }
+
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self setNavigationBarHidden:NO];
+}
+
+
 
 -(void)setUI
 {
     [self.view addSubview:self.imageView];
-    [self.view addSubview:self.messageLabel];
-    [self.view addSubview:self.incomeTitleLabel];
-    [self.view addSubview:self.incomeLabel];
+    [self.imageView addSubview:self.incomeTitleLabel];
+    [self.imageView addSubview:self.incomeLabel];
+    [self.imageView addSubview:self.typeLabel];
+    [self.imageView addSubview:self.codeTipLabel];
+    [self.imageView addSubview:self.codeLabel];
+    [self.imageView addSubview:self.numberTipLabel];
+    [self.imageView addSubview:self.numberLabel];
+    [self.imageView addSubview:self.openTipLabel];
+    [self.imageView addSubview:self.openPriceLabel];
     
-    [self addLabels];
-    
-    [self.view addSubview:self.bottomBackView];
 
     [self.imageView addSubview:self.qrCodeImageView];
     
-    
-    [self.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
-       
-        make.edges.equalTo(self.view).insets(UIEdgeInsetsMake(Height_NavBar, 0, 0, 0));
+    [self.imageView mas_makeConstraints:^(MASConstraintMaker *make)
+    {
+        make.edges.equalTo(self.view).insets(UIEdgeInsetsMake(0, 0, 0, 0));
     }];
+    
+    
+    [self.incomeTitleLabel mas_makeConstraints:^(MASConstraintMaker *make)
+    {
+        make.top.equalTo(self.imageView.mas_top).offset(200);
+        make.centerX.equalTo(self.imageView.mas_centerX);
+    }];
+    
+    [self.typeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+       
+        make.centerY.equalTo(self.incomeTitleLabel.mas_centerY);
+        make.left.equalTo(self.incomeTitleLabel.mas_right).offset(10);
+        make.height.equalTo(@(20));
+        make.width.equalTo(@(35));
+        
+    }];
+    
+    [self.incomeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+       
+        make.top.equalTo(self.incomeTitleLabel.mas_bottom).offset(15);
+        make.centerX.equalTo(self.imageView.mas_centerX);
+        
+    }];
+    
+    [self.codeTipLabel mas_makeConstraints:^(MASConstraintMaker *make)
+    {
+       make.right.equalTo(self.numberTipLabel.mas_left).offset(-ScaleW(80));
+       make.centerY.equalTo(self.numberTipLabel.mas_centerY);
+    }];
+       
+    [self.codeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+      
+       make.centerX.equalTo(self.codeTipLabel.mas_centerX);
+       make.centerY.equalTo(self.numberLabel.mas_centerY);
+       
+    }];
+    
+    
+    [self.numberTipLabel mas_makeConstraints:^(MASConstraintMaker *make)
+    {
+        make.top.equalTo(self.incomeLabel.mas_bottom).offset(40);
+        make.centerX.equalTo(self.imageView.mas_centerX);
+    }];
+    
+    
+    [self.numberLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+       
+        make.centerY.equalTo(self.numberTipLabel.mas_bottom).offset(ScaleW(15));
+        make.centerX.equalTo(self.imageView.mas_centerX);
+        
+    }];
+    
+    
+    [self.openTipLabel mas_makeConstraints:^(MASConstraintMaker *make)
+    {
+       make.left.equalTo(self.numberTipLabel.mas_right).offset(ScaleW(80));
+       make.centerY.equalTo(self.numberTipLabel.mas_centerY);
+    }];
+       
+    [self.openPriceLabel mas_makeConstraints:^(MASConstraintMaker *make)
+    {
+      
+       make.centerX.equalTo(self.openTipLabel.mas_centerX);
+       make.centerY.equalTo(self.numberLabel.mas_centerY);
+       
+    }];
+    
+    
+   
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     [self.qrCodeImageView mas_makeConstraints:^(MASConstraintMaker *make) {
        
@@ -79,6 +180,62 @@
     }];
 }
 
+
+
+
+
+-(void)backClick
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+
+
+-(void)rigthBtnAction
+{
+    UIImage *image = [self screenShot];
+    UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:),nil);
+}
+
+- (void)setChengjiaoModel:(Heyue_Order_ChengjiaoModel *)chengjiaoModel
+{
+    _chengjiaoModel = chengjiaoModel;
+    [self.codeLabel setText:[[chengjiaoModel.code stringByReplacingOccurrencesOfString:@"_" withString:@"/"] uppercaseString]];
+    [self.numberLabel setText:chengjiaoModel.buynum];
+    [self.incomeLabel setText:[SSTool HeyuePname:chengjiaoModel.code price:chengjiaoModel.profit]];
+    
+     if (chengjiaoModel.profit.doubleValue < 0)
+     {
+        self.incomeLabel.textColor = RED_HEX_COLOR;
+         
+     }
+     else
+     {
+        self.incomeLabel.textColor = GREEN_HEX_COLOR;
+     }
+    
+    if (chengjiaoModel.otype.integerValue == 1)
+    {
+        self.typeLabel.text = SSKJLocalized(@"做多", nil);
+        [self.typeLabel setBackgroundColor:GREEN_HEX_COLOR];
+    }
+    else
+    {
+        self.typeLabel.text = SSKJLocalized(@"做空", nil);
+        [self.typeLabel setBackgroundColor:RED_HEX_COLOR];
+    }
+    
+    
+    [self.openPriceLabel setText:[SSTool HeyuePname:chengjiaoModel.code price:chengjiaoModel.buyprice]];
+    
+    
+}
+
+
+
+
+
+#pragma mark - Getter / Setter
 - (UIImageView *)imageView
 {
     if (nil == _imageView)
@@ -89,120 +246,119 @@
     return _imageView;
 }
 
--(UILabel *)messageLabel
-{
-    if (nil == _messageLabel)
-    {
-        _messageLabel = [WLTools allocLabel:@"" font:systemFont(ScaleW(17)) textColor:kSubTitleColor frame:CGRectMake(ScaleW(15),ScaleW(240), ScreenWidth - ScaleW(30), ScaleW(17)) textAlignment:NSTextAlignmentCenter];
-        
-        if (self.chengjiaoModel.profit.doubleValue < 0)
-        {
-            _messageLabel.text = SSKJLocalized(@"再接再厉", nil);
-
-        }
-        else
-        {
-            _messageLabel.text = SSKJLocalized(@"小试牛刀", nil);
-
-        }
-        
-    }
-    return _messageLabel;
-}
 
 
 -(UILabel *)incomeTitleLabel
 {
-    if (nil == _incomeTitleLabel) {
-        _incomeTitleLabel = [WLTools allocLabel:SSKJLocalized(@"收益", nil) font:systemFont(ScaleW(15)) textColor:kSubTitleColor frame:CGRectMake(ScaleW(15), self.messageLabel.bottom + ScaleW(50), ScreenWidth - ScaleW(30), ScaleW(15)) textAlignment:NSTextAlignmentCenter];
+    if (nil == _incomeTitleLabel)
+    {
+        _incomeTitleLabel = [WLTools allocLabel:SSKJLocalized(@"盈利金额", nil) font:systemFont(ScaleW(15)) textColor:kSubTitleColor frame:CGRectZero textAlignment:NSTextAlignmentCenter];
     }
     return _incomeTitleLabel;
 }
 
+-(UILabel *)typeLabel
+{
+    if (nil == _typeLabel)
+    {
+        _typeLabel = [[UILabel alloc]init];
+        [_typeLabel setFont:systemFont(12)];
+        [_typeLabel setTextColor:kWhiteColor];
+        [_typeLabel setTextAlignment:NSTextAlignmentCenter];
+        [_typeLabel.layer setCornerRadius:3];
+        [_typeLabel.layer setMasksToBounds:YES];
+    }
+    return _typeLabel;
+}
+
+
+
+
+
+
 -(UILabel *)incomeLabel
 {
-    if (nil == _incomeLabel) {
-        _incomeLabel = [WLTools allocLabel:SSKJLocalized(@"15.4", nil) font:systemFont(ScaleW(25)) textColor:[UIColor blackColor] frame:CGRectMake(ScaleW(15), self.incomeTitleLabel.bottom + ScaleW(10), ScreenWidth - ScaleW(30), ScaleW(25)) textAlignment:NSTextAlignmentCenter];
-        _incomeLabel.text =  [SSTool HeyuePname:self.chengjiaoModel.code price:self.chengjiaoModel.profit];
-        
-        if (self.chengjiaoModel.profit.doubleValue < 0) {
-            _incomeLabel.textColor = RED_HEX_COLOR;
-        }else{
-            _incomeLabel.textColor = GREEN_HEX_COLOR;
-        }
-
+    if (nil == _incomeLabel)
+    {
+        _incomeLabel = [WLTools allocLabel:SSKJLocalized(@"15.4", nil) font:systemBoldFont(ScaleW(20)) textColor:[UIColor blackColor] frame:CGRectZero textAlignment:NSTextAlignmentCenter];
     }
     return _incomeLabel;
 }
 
-
--(void)addLabels
+-(UILabel *)codeTipLabel
 {
-    NSArray *array = @[[NSString stringWithFormat:@"%@%@",[self.chengjiaoModel.code uppercaseString],SSKJLocalized(@"永续", nil)],SSKJLocalized(@"开仓价格", nil),SSKJLocalized(@"当前价格", nil)];
-    
-    CGFloat startX = ScaleW(30);
-    
-    CGFloat startY = self.incomeLabel.bottom + ScaleW(50);
-    
-    CGFloat width = (ScreenWidth - 2 * startX) / 3;
-    
-    for (int i = 0; i < array.count; i++)
+    if (!_codeTipLabel)
     {
-        
-        CGFloat newWidth = width;
-        if (i == 0)
-        {
-            newWidth = width + ScaleW(30);
-        }
-        else
-        {
-            newWidth = width - ScaleW(15);
-        }
-        
-        
-        UILabel *titleLabel = [WLTools allocLabel:array[i] font:systemFont(ScaleW(15)) textColor:kSubTitleColor frame:CGRectMake(startX, startY, newWidth, ScaleW(15)) textAlignment:NSTextAlignmentLeft];
-        [self.view addSubview:titleLabel];
-        titleLabel.adjustsFontSizeToFitWidth = YES;
-        UILabel *valueLabel = [WLTools allocLabel:array[i] font:systemFont(ScaleW(15)) textColor:[UIColor blackColor] frame:CGRectMake(startX , titleLabel.bottom + ScaleW(5), newWidth, ScaleW(15)) textAlignment:NSTextAlignmentLeft];
-        [self.view addSubview:valueLabel];
-        
-        startX += newWidth;
-        if (i == 0)
-        {
-            self.typeLabel = valueLabel;
-            if (self.chengjiaoModel.otype.integerValue == 1)
-            {
-                self.typeLabel.text = SSKJLocalized(@"做多", nil);
-                self.typeLabel.textColor = GREEN_HEX_COLOR;
-            }
-            else
-            {
-                self.typeLabel.text = SSKJLocalized(@"做多", nil);
-                self.typeLabel.textColor = RED_HEX_COLOR;
-            }
-        }
-        else if (i == 1)
-        {
-            self.openPriceLabel = valueLabel;
-            self.openPriceLabel.text = [SSTool HeyueCoin:self.chengjiaoModel.code price:self.chengjiaoModel.buyprice];
-        }
-        else  if (i == 2)
-        {
-            self.closePriceLabel = valueLabel;
-            titleLabel.textAlignment = valueLabel.textAlignment = NSTextAlignmentRight;
-            if ([self.chengjiaoModel.type integerValue] == 1)
-            {
-                self.closePriceLabel.text = SSKJLanguage(@"市价");
-            }
-            else if ([self.chengjiaoModel.type integerValue] == 2)
-            {
-                self.closePriceLabel.text = [SSTool HeyueCoin:self.chengjiaoModel.code price:self.chengjiaoModel.marketPrice];
-            }
-        }
-            
+        _codeTipLabel = [[UILabel alloc]init];
+        [_codeTipLabel setTextColor:kSubTitleColor];
+        [_codeTipLabel setFont:systemFont(ScaleW(14))];
+        [_codeTipLabel setText:SSKJLanguage(@"USDT合约")];
     }
-    
+    return _codeTipLabel;
 }
+
+
+- (UILabel *)codeLabel
+{
+    if (!_codeLabel)
+    {
+        _codeLabel = [[UILabel alloc]init];
+        [_codeLabel setTextColor:[UIColor blackColor]];
+        [_codeLabel setFont:systemFont(ScaleW(17))];
+    }
+    return _codeLabel;
+}
+
+
+-(UILabel *)numberTipLabel
+{
+    if (!_numberTipLabel)
+    {
+        _numberTipLabel = [[UILabel alloc]init];
+        [_numberTipLabel setTextColor:kSubTitleColor];
+        [_numberTipLabel setFont:systemFont(ScaleW(14))];
+        [_numberTipLabel setText:SSKJLanguage(@"数量")];
+    }
+    return _numberTipLabel;
+}
+
+
+- (UILabel *)numberLabel
+{
+    if (!_numberLabel)
+    {
+        _numberLabel = [[UILabel alloc]init];
+        [_numberLabel setTextColor:[UIColor blackColor]];
+        [_numberLabel setFont:systemFont(ScaleW(17))];
+    }
+    return _numberLabel;
+}
+
+
+-(UILabel *)openTipLabel
+{
+    if (!_openTipLabel)
+    {
+        _openTipLabel = [[UILabel alloc]init];
+        [_openTipLabel setTextColor:kSubTitleColor];
+        [_openTipLabel setFont:systemFont(ScaleW(14))];
+        [_openTipLabel setText:SSKJLanguage(@"开仓价")];
+    }
+    return _openTipLabel;
+}
+
+
+- (UILabel *)openPriceLabel
+{
+    if (!_openPriceLabel)
+    {
+        _openPriceLabel = [[UILabel alloc]init];
+        [_openPriceLabel setTextColor:[UIColor blackColor]];
+        [_openPriceLabel setFont:systemFont(ScaleW(17))];
+    }
+    return _openPriceLabel;
+}
+
 
 
 
@@ -212,12 +368,14 @@
     if (nil == _qrCodeImageView)
     {
         _qrCodeImageView = [[UIImageView alloc]init];
+        [_qrCodeImageView setHidden:YES];
     }
     return _qrCodeImageView;
 }
 
 
 
+#pragma mark 获取分享二维码
 -(void)requestLink
 {
     WS(weakSelf);
@@ -229,7 +387,7 @@
         
         if (network_Model.status.integerValue == SUCCESSED)
         {
-            [weakSelf.qrCodeImageView sd_setImageWithURL:[NSURL URLWithString:@"qrcode"]];
+            [weakSelf.qrCodeImageView sd_setImageWithURL:[NSURL URLWithString:[network_Model.data objectForKey:@"qrcode"]]];
         }
         else
         {
@@ -246,11 +404,7 @@
 
 
 
--(void)rigthBtnAction:(id)sender
-{
-    UIImage *image = [self screenShot];
-    UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:),nil);
-}
+
 
 
 // 需要实现下面的方法,或者传入三个参数即可

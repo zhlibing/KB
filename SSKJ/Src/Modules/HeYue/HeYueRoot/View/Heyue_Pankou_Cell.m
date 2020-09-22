@@ -24,15 +24,14 @@
         self.backgroundColor = [UIColor clearColor];
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self.contentView addSubview:self.bgView];
-        
-//        [self.contentView addSubview:self.noLabel];
+        [self.contentView addSubview:self.noLabel];
         [self.contentView addSubview:self.priceLabel];
         [self.contentView addSubview:self.numberLabel];
-        [self.numberLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.centerY.equalTo(self.noLabel.mas_centerY);
+        [self.numberLabel mas_makeConstraints:^(MASConstraintMaker *make)
+        {
             make.centerY.equalTo(self.priceLabel.mas_centerY);
             make.right.equalTo(self.contentView);
-            make.width.equalTo(@((ScreenWidth / 2 - ScaleW(15))*0.3 - - ScaleW(5)));
+            make.width.equalTo(@(ScaleW(60)));
         }];
         
         
@@ -45,7 +44,8 @@
 }
 
 - (UIView *)bgView{
-    if (_bgView == nil) {
+    if (_bgView == nil)
+    {
         _bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Pankouwidth, ScaleW(25))];
         _bgView.backgroundColor = [kMarketUp colorWithAlphaComponent:0.3];
         
@@ -54,42 +54,38 @@
 }
 
 
-- (UILabel *)noLabel{
-    if (_noLabel == nil) {
+- (UILabel *)noLabel
+{
+    if (_noLabel == nil)
+    {
         _noLabel = [WLTools allocLabel:@"1" font:systemFont(ScaleW(10)) textColor:kSubTitleColor frame:CGRectMake(0, 0, Pankouwidth * 0.2, ScaleW(25)) textAlignment:NSTextAlignmentCenter];
     }
     return _noLabel;
 }
 
-- (UILabel *)priceLabel{
-    if (_priceLabel == nil) {
-//        _priceLabel = [WLTools allocLabel:@"" font:systemFont(ScaleW(10)) textColor:kTitleColor frame:CGRectMake(self.noLabel.right + ScaleW(5), 0, Pankouwidth * 0.5, ScaleW(25)) textAlignment:NSTextAlignmentCenter];
+
+- (UILabel *)priceLabel
+{
+    if (_priceLabel == nil)
+    {
         _priceLabel = [WLTools allocLabel:@"" font:systemFont(ScaleW(10)) textColor:kTitleColor frame:CGRectMake(0, 0, Pankouwidth * 0.5, ScaleW(25)) textAlignment:NSTextAlignmentCenter];
 
     }
     return _priceLabel;
 }
 
-- (UILabel *)numberLabel{
-    if (_numberLabel == nil) {
-        _numberLabel = [WLTools allocLabel:@"" font:systemFont(ScaleW(10)) textColor:kSubTitleColor frame:CGRectMake(Pankouwidth - Pankouwidth * 0.3 - ScaleW(5) , 0, Pankouwidth * 0.3 - ScaleW(5), ScaleW(25)) textAlignment:NSTextAlignmentRight];
+- (UILabel *)numberLabel
+{
+    if (_numberLabel == nil)
+    {
+        _numberLabel = [[UILabel alloc]init];
+        [_numberLabel setFont:systemBoldFont(ScaleW(10))];
+        [_numberLabel setTextColor:[UIColor blackColor]];
         _numberLabel.numberOfLines = 1;
-        _numberLabel.adjustsFontSizeToFitWidth = YES;
+        [_numberLabel setTextAlignment:NSTextAlignmentRight];
     }
     return _numberLabel;
 }
 
-
-
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    // Initialization code
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
-}
 
 @end

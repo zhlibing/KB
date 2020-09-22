@@ -142,26 +142,22 @@
 
 -(void)setViewWithModel:(ETF_BBTrade_Introduce_Model *)model
 {
-    self.coinNameLabel.text = [[model.code uppercaseString]componentsSeparatedByString:@"_"].firstObject;
-    self.timeLabel.text = model.fxtime;
-    self.faxingLabel.text = model.fxnum;
-    self.liutongLabel.text = model.fxweb;
-    self.bookLabel.text = model.fxbook;
+    if (model)
+    {
+        self.coinNameLabel.text = [[model.code uppercaseString]componentsSeparatedByString:@"_"].firstObject;
+        self.timeLabel.text = model.fxtime;
+        self.faxingLabel.text = model.fxnum;
+        self.liutongLabel.text = model.fxweb;
+        self.bookLabel.text = model.fxbook;
+            
+        self.memoLabel.text = [WLTools flattenHTML:model.memo];
+
         
-    self.memoLabel.text = [WLTools flattenHTML:model.memo];
-
-    
-    CGFloat height = [model.memo boundingRectWithSize:CGSizeMake(self.memoLabel.width, 10000) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:self.memoLabel.font} context:nil].size.height;
-    self.memoLabel.height = height;
-    self.height = self.memoLabel.bottom + ScaleW(30);
+        CGFloat height = [model.memo boundingRectWithSize:CGSizeMake(self.memoLabel.width, 10000) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:self.memoLabel.font} context:nil].size.height;
+        self.memoLabel.height = height;
+        self.height = self.memoLabel.bottom + ScaleW(30);
+    }
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
 
 @end

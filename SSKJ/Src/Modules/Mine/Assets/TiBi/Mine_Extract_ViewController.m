@@ -355,6 +355,7 @@
         _numberTextField.textColor = kTitleColor;
         _numberTextField.placeholder = SSKJLocalized(@"输入提币数量", nil);
         _numberTextField.font = systemFont(ScaleW(12));
+        [_numberTextField setKeyboardType:UIKeyboardTypeNumberPad];
         _numberTextField.delegate = self;
         [_numberTextField addTarget:self action:@selector(inputChanged) forControlEvents:UIControlEventEditingChanged];
     }

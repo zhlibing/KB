@@ -156,18 +156,19 @@
     
     NSString *s = [model.code uppercaseString];
     NSArray *codeA = [[s uppercaseString] componentsSeparatedByString:@"_"];
-    if (codeA.count>0) {
+    if (codeA.count>0)
+    {
         NSString *iconName = codeA[0];
         iconName = [NSString stringWithFormat:@"%@",iconName];
         
         UIImage *image = [UIImage imageNamed:iconName];
-//        self.coinImageView.width = ScaleW(image.size.width);
-//        self.coinImageView.height = ScaleW(image.size.height);
-//        self.coinImageView.image = image;
         
-        if (model.image.length) {
-            [self.coinImageView sd_setImageWithURL:[NSURL URLWithString:[WLTools imageURLWithURL:model.image]] placeholderImage:image];
-        }else{
+        if (model.image.length)
+        {
+            [self.coinImageView sd_setImageWithURL:[NSURL URLWithString:model.image] placeholderImage:image];
+        }
+        else
+        {
             self.coinImageView.image = nil;
         }
         

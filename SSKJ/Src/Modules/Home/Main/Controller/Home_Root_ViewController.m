@@ -326,13 +326,15 @@ static NSString *nodaCellId = @"nodaCellId";
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    if (self.dataSource.count > 0) {
+    if (self.dataSource.count > 0)
+    {
         Home_Market_Cell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
-        SSKJ_Market_Index_Model *model = self.dataSource[indexPath.row];
-        [cell setCellWithModel:model];
+        [cell setCellWithModel:self.dataSource[indexPath.row]];
 
         return cell;
-    }else{
+    }
+    else
+    {
         Nodata_Cell *cell = [tableView dequeueReusableCellWithIdentifier:nodaCellId];
         [cell setCellWithTitle:SSKJLocalized(@"暂无记录", nil)];
         return cell;
@@ -347,7 +349,6 @@ static NSString *nodaCellId = @"nodaCellId";
     }
     HeYue_KlineViewController *vc = [[HeYue_KlineViewController alloc]init];
     vc.coinModel = self.dataSource[indexPath.row];
-//    vc.isFromHome = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -445,7 +446,8 @@ static NSString *nodaCellId = @"nodaCellId";
 {
     NSArray *array = [SSKJ_Market_Index_Model mj_objectArrayWithKeyValuesArray:network_model.data];
     
-    if (self.dataSource.count == 0) {
+    if (self.dataSource.count == 0)
+    {
         [[NSNotificationCenter defaultCenter]postNotificationName:@"didGetCoinModel" object:array.firstObject];
     }
 

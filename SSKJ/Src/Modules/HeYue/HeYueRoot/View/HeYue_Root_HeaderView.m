@@ -735,7 +735,8 @@
 //    [self.deepView setData:shenduDic isLarge:YES];
 }
 
-- (void)setPankouModel:(PanKou_Socket_Model *)pankouModel{
+- (void)setPankouModel:(PanKou_Socket_Model *)pankouModel
+{
     self.pankouView.pankouModel = pankouModel;
 }
 

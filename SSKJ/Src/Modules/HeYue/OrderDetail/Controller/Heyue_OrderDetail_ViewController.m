@@ -52,8 +52,8 @@
     [[ProfitWeiTuoChiCangHelper shareHelper] setGetProfitWeiTuoChiCangBlock:^(Heyue_OrderInfo_Model * _Nonnull profitModel, NSArray * _Nonnull weituoArray, NSArray * _Nonnull chicangArray)
     {
         [weakSelf.headerView setModel:profitModel];
-        [weakSelf.weituoVC setItemArry:chicangArray];
-        [weakSelf.chicangVC setItemArry:weituoArray];
+        [weakSelf.weituoVC setItemArry:weituoArray];
+        [weakSelf.chicangVC setItemArry:chicangArray];
     }];
 }
 
@@ -108,7 +108,7 @@
 {
     if (nil == _segmentControl) {
         
-        _segmentControl = [[Home_Segment_View alloc]initWithFrame:CGRectMake(0, self.headerView.bottom + ScaleW(10), ScreenWidth-150, ScaleW(40)) titles:@[SSKJLocalized(@"委托",nil),SSKJLocalized(@"持仓", nil), SSKJLocalized(@"成交", nil)] normalColor:kTitleColor selectedColor:kBlueColor fontSize:ScaleW(15)];
+        _segmentControl = [[Home_Segment_View alloc]initWithFrame:CGRectMake(0, self.headerView.bottom + ScaleW(10), ScreenWidth-150, ScaleW(40)) titles:@[SSKJLocalized(@"持仓", nil),SSKJLocalized(@"委托",nil), SSKJLocalized(@"成交", nil)] normalColor:kTitleColor selectedColor:kBlueColor fontSize:ScaleW(15)];
         
         WS(weakSelf);
         _segmentControl.selectedIndexBlock = ^(NSInteger index) {
@@ -134,19 +134,20 @@
         _scrollView.backgroundColor = kBgColor;
         
         
-        self.weituoVC= [[Heyue_WeiTuo_Order_VC alloc]init];
-        [self addChildViewController:self.weituoVC];
-        [self.scrollView addSubview:self.weituoVC.view];
-        self.weituoVC.view.frame = CGRectMake(0, 0, ScreenWidth, self.scrollView.height);
         
         
-        //委托
+        
+        //持仓
         self.chicangVC = [[Heyue_ChiCang_Order_VC alloc]init];
         [self addChildViewController:self.chicangVC];
         [self.scrollView addSubview:self.chicangVC.view];
-        self.chicangVC.view.frame = CGRectMake(ScreenWidth, 0, ScreenWidth, self.scrollView.height);
-
+        self.chicangVC.view.frame = CGRectMake(0, 0, ScreenWidth, self.scrollView.height);
         
+        //委托
+        self.weituoVC= [[Heyue_WeiTuo_Order_VC alloc]init];
+        [self addChildViewController:self.weituoVC];
+        [self.scrollView addSubview:self.weituoVC.view];
+        self.weituoVC.view.frame = CGRectMake(ScreenWidth, 0, ScreenWidth, self.scrollView.height);
         
         //成交
         self.chengjiaoVC = [[Heyue_CengJiao_Order_VC alloc]init];

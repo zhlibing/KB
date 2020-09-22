@@ -331,7 +331,8 @@ static NSString * NodataCellID = @"NodataCell";
 
 #pragma mark - 推送返回的数据
 //接收推送数据
--(void)socketDidReciveData:(id)data identifier:(NSString *)identifier{
+-(void)socketDidReciveData:(id)data identifier:(NSString *)identifier
+{
     
     if (![data[@"code"] isEqualToString:self.model.code])
     {
@@ -342,7 +343,9 @@ static NSString * NodataCellID = @"NodataCell";
 
         self.pankouModel = [PanKou_Socket_Model mj_objectWithKeyValues:data];
         self.headerView.pankouModel = self.pankouModel;
-    } else if ([identifier isEqualToString:ShenduSocket]){
+    }
+    else if ([identifier isEqualToString:ShenduSocket])
+    {
         
         NSDictionary *pushGoodsInfoDatas = nil;
         if ([data isKindOfClass:[NSString class]]){
@@ -494,8 +497,6 @@ static NSString * NodataCellID = @"NodataCell";
                 }
                 Heyue_OrderDetail_ViewController *vc = [[Heyue_OrderDetail_ViewController alloc]init];
                 vc.seletedIndex = 0;
-                
-        //        vc.model = weakSelf.model;
                 [weakSelf.navigationController pushViewController:vc animated:YES];
             };
         _sectionView = view;
@@ -631,16 +632,18 @@ static NSString * NodataCellID = @"NodataCell";
 {
     if (self.model.code.length < 1)
     {
+        [self endRefresh];
         return;
     }
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSDictionary *params = @{@"code":self.model.code};
-    //GetLeverageURL
     WS(weakSelf);
-    [[WLHttpManager shareManager] requestWithURL_HTTPCode:URL_HEYUE_Setting_URL RequestType:RequestTypeGet Parameters:params Success:^(NSInteger statusCode, id responseObject) {
+    [[WLHttpManager shareManager] requestWithURL_HTTPCode:URL_HEYUE_Setting_URL RequestType:RequestTypeGet Parameters:params Success:^(NSInteger statusCode, id responseObject)
+     {
         [hud hideAnimated:YES];
         WL_Network_Model *netModel = [WL_Network_Model mj_objectWithKeyValues:responseObject];
-        if (netModel.status.integerValue == 200) {
+        if (netModel.status.integerValue == 200)
+        {
 
             
             weakSelf.leverageModel = [Heyue_Leverage_Model mj_objectWithKeyValues:netModel.data];
@@ -648,10 +651,16 @@ static NSString * NodataCellID = @"NodataCell";
             weakSelf.headerView.leverageModel = weakSelf.leverageModel;
             //change
             weakSelf.headerView.baoCang = [NSString stringWithFormat:@"%@%@",[SSTool disposePname:@"2" price:[NSString stringWithFormat:@"%.9f", weakSelf.leverageModel.bc_rate.doubleValue]],@"%"];
-        }else{
+        }
+        else
+        {
             [MBProgressHUD showError:netModel.msg];
         }
-    } Failure:^(NSError *error, NSInteger statusCode, id responseObject) {
+        
+        [self endRefresh];
+    } Failure:^(NSError *error, NSInteger statusCode, id responseObject)
+    {
+        [self endRefresh];
         [hud hideAnimated:YES];
     }];
 }
@@ -664,10 +673,12 @@ static NSString * NodataCellID = @"NodataCell";
     WS(weakSelf);
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSDictionary *params = @{@"code":self.model.code,@"type":@"depth"};
-    [[WLHttpManager shareManager] requestWithURL_HTTPCode:BI_BBCoinPankou_URL RequestType:RequestTypeGet Parameters:params Success:^(NSInteger statusCode, id responseObject) {
+    [[WLHttpManager shareManager] requestWithURL_HTTPCode:BI_BBCoinPankou_URL RequestType:RequestTypeGet Parameters:params Success:^(NSInteger statusCode, id responseObject)
+     {
         [hud hideAnimated:YES];
         WL_Network_Model *netModel = [WL_Network_Model mj_objectWithKeyValues:responseObject];
-        if (netModel.status.integerValue == 200) {
+        if (netModel.status.integerValue == 200)
+        {
             weakSelf.pankouModel = [PanKou_Socket_Model mj_objectWithKeyValues:[netModel.data firstObject]];
             weakSelf.pankouModel.code = weakSelf.model.code;
             weakSelf.headerView.pankouModel = weakSelf.pankouModel;

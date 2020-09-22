@@ -470,8 +470,7 @@ static NSString *marketSocketIdentifier = @"maekSocketIdentifier";
     
     
     WS(weakSelf);
- MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    //Get_shendu_URL
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [[WLHttpManager shareManager] requestWithURL_HTTPCode:BI_BBCoinDeep_URL RequestType:RequestTypeGet Parameters:dict Success:^(NSInteger statusCode, id responseObject)
      {
          [hud hideAnimated:YES];
@@ -484,7 +483,9 @@ static NSString *marketSocketIdentifier = @"maekSocketIdentifier";
              {
                  weakSelf.scrollView.contentSize = CGSizeMake(ScreenWidth, self.depthView.bottom + ScaleW(60));
              }
-         }else{
+         }
+         else
+         {
              [MBProgressHUD showError:network_Model.msg];
          }
          
@@ -515,7 +516,8 @@ static NSString *marketSocketIdentifier = @"maekSocketIdentifier";
          if (network_Model.status.integerValue == SUCCESSED)
          {
              NSArray *array = [JB_BBTrade_SocketDealOrder_Model mj_objectArrayWithKeyValuesArray:network_Model.data[@"data"]];
-             for (JB_BBTrade_SocketDealOrder_Model *mode in array) {
+             for (JB_BBTrade_SocketDealOrder_Model *mode in array)
+             {
                  mode.income = mode.amount;
                  mode.type = mode.dc;
                  mode.selltime = mode.dt;
@@ -527,10 +529,13 @@ static NSString *marketSocketIdentifier = @"maekSocketIdentifier";
              weakSelf.socketOrderView.dataSource = array;
              weakSelf.socketOrderView.coinModel = weakSelf.coinModel;
              
-             if (weakSelf.introductHeaderView.selectedIndex == 1) {
+             if (weakSelf.introductHeaderView.selectedIndex == 1)
+             {
                  weakSelf.scrollView.contentSize = CGSizeMake(ScreenWidth, self.socketOrderView.bottom + ScaleW(60));
              }
-         }else{
+         }
+         else
+         {
              [MBProgressHUD showError:network_Model.msg];
          }
          
@@ -564,7 +569,9 @@ static NSString *marketSocketIdentifier = @"maekSocketIdentifier";
              weakSelf.kLineDataArray=network_Model.data;
              
              [weakSelf setKlineView];
-         }else{
+         }
+         else
+         {
              [MBProgressHUD showError:network_Model.msg];
          }
          
@@ -610,13 +617,17 @@ static NSString *marketSocketIdentifier = @"maekSocketIdentifier";
     
     NSDictionary *dic = (NSDictionary *)data;
     
-    if ([identifier isEqualToString:marketSocketIdentifier]) {
+    if ([identifier isEqualToString:marketSocketIdentifier])
+    {
         SSKJ_Market_Index_Model *socketModel = [SSKJ_Market_Index_Model mj_objectWithKeyValues:dic];
         self.headerView.coinModel = socketModel;
         
-        if (socketModel.change.doubleValue < 0) {
+        if (socketModel.change.doubleValue < 0)
+        {
             self.bbTradebutton.backgroundColor = KRedColor;
-        }else{
+        }
+        else
+        {
             self.bbTradebutton.backgroundColor = KgreenColor;
         }
 
@@ -628,6 +639,8 @@ static NSString *marketSocketIdentifier = @"maekSocketIdentifier";
         {
             LXY_KLine_DataModel *model = [LXY_KLine_DataModel mj_objectWithKeyValues:dic];
             
+            SSKJ_Market_Index_Model *socketModel = [SSKJ_Market_Index_Model mj_objectWithKeyValues:dic];
+            
             model.high = dic[@"high"];
             model.low = dic[@"low"];
             model.open = dic[@"open"];
@@ -636,6 +649,7 @@ static NSString *marketSocketIdentifier = @"maekSocketIdentifier";
             model.timestamp =  dic[@"timestamp"];
             [self.kLineView refreshWithSocketData:model minuteInvital:currentModel.minute];
             [self.kLineView setCurrentPrice:model.price];
+            self.headerView.coinModel = socketModel;
         }
                 
     }
@@ -713,19 +727,16 @@ static NSString *marketSocketIdentifier = @"maekSocketIdentifier";
     NSMutableDictionary *pamaDic = [NSMutableDictionary dictionary];
     [pamaDic setObject:self.coinModel.code forKey:@"code"];
     WS(weakSelf);
-    //ETF_BBTrade_CoinIntroduce_URL
     [[WLHttpManager shareManager]requestWithURL_HTTPCode:BI_BBCoinInfo_URL RequestType:(RequestTypeGet) Parameters:pamaDic Success:^(NSInteger statusCode, id responseObject) {
         WL_Network_Model *network_Model=[WL_Network_Model mj_objectWithKeyValues:responseObject];
-        if (network_Model.status.integerValue == 200) {
-            
-            NSDictionary *dataDic = network_Model.data;
-            
-            ETF_BBTrade_Introduce_Model *currentModel = [ETF_BBTrade_Introduce_Model mj_objectWithKeyValues:dataDic];
+        if (network_Model.status.integerValue == 200)
+        {            
+            ETF_BBTrade_Introduce_Model *currentModel = [ETF_BBTrade_Introduce_Model mj_objectWithKeyValues:network_Model.data];
             weakSelf.introduceModel = currentModel;
-            //            weakSelf.introduceModel.name = _model.name;
             [weakSelf.introductView setViewWithModel:currentModel];
             
-            if (self.introductHeaderView.selectedIndex == 2) {
+            if (self.introductHeaderView.selectedIndex == 2)
+            {
                 self.scrollView.contentSize = CGSizeMake(ScreenWidth, self.introductView.bottom + ScaleW(60));
             }
             
@@ -779,11 +790,11 @@ static NSString *marketSocketIdentifier = @"maekSocketIdentifier";
 
 -(ETF_BBTrade_TableHeaderView *)headerView
 {
-    if (nil == _headerView) {
+    if (nil == _headerView)
+    {
         _headerView = [[ETF_BBTrade_TableHeaderView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScaleW(105))];
         [_headerView setBackgroundColor:UIColorFromRGB(0x131E31)];
         _headerView.coinModel = self.coinModel;
-        
     }
     return _headerView;
 }
@@ -839,7 +850,7 @@ static NSString *marketSocketIdentifier = @"maekSocketIdentifier";
 {
     if (nil == _kLineView)
     {
-        _kLineView = [[LXY_KLineView alloc]initWithFrame:CGRectMake(0, self.segmentControl.bottom + ScaleW(3), ScreenWidth+120, ScaleW(500)) accessoryType:LXY_ACCESSORYTYPENONE mainAccessoryType:LXY_KMAINACCESSORYTYPEMA];
+        _kLineView = [[LXY_KLineView alloc]initWithFrame:CGRectMake(0, self.segmentControl.bottom + ScaleW(3), ScreenWidth, ScaleW(500)) accessoryType:LXY_ACCESSORYTYPENONE mainAccessoryType:LXY_KMAINACCESSORYTYPEMA];
 
     }
     return _kLineView;

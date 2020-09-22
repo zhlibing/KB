@@ -14,7 +14,8 @@
 #import "NSString+Conversion.h"
 
 #define ksendHeartTimeInterval 5
-@interface ManagerSocket()<SRWebSocketDelegate> {
+@interface ManagerSocket()<SRWebSocketDelegate>
+{
     NSInteger _reconnectCounter;
 }
 //主动断开：用于主动断开不需要自动重连YES主动  NO被动
@@ -113,30 +114,40 @@
 - (void)socketSendMsg:(NSString*)str
 {
     [self.webSocket send:str];
+    [self startSendHeartTimer];
 }
 //发送心跳消息
-- (void)sendHeartMsg{
+- (void)sendHeartMsg
+{
     [self.webSocket send:@"pong"];
+    NSLog(@"\n\n\n=============\n\n\n发送心跳\n\n\n=============\n\n\n");
 
 }
 #pragma mark -- 定时器管理
 //开启重新连接定时器
-- (void)startReconnectSocketTimer {
-    if (!_reconnectSocketTimer) {
+- (void)startReconnectSocketTimer
+{
+    if (!_reconnectSocketTimer)
+    {
         _reconnectSocketTimer = [NSTimer scheduledTimerWithTimeInterval:self.overtime target:self selector:@selector(openConnectSocket) userInfo:nil repeats:NO];
         [[NSRunLoop currentRunLoop] addTimer:_reconnectSocketTimer forMode:NSRunLoopCommonModes];
     }
 }
 //开启发送心跳定时器
-- (void)startSendHeartTimer {
-    if (!_sendHeartTimer) {
+- (void)startSendHeartTimer
+{
+    if (!_sendHeartTimer)
+    {
         _sendHeartTimer = [NSTimer scheduledTimerWithTimeInterval:ksendHeartTimeInterval target:self selector:@selector(sendHeartMsg) userInfo:nil repeats:YES];
+        [_sendHeartTimer fire];
         [[NSRunLoop currentRunLoop] addTimer:_sendHeartTimer forMode:NSRunLoopCommonModes];
     }
 }
 
-- (void)clearReconnectSocketTimer {
-    if (_reconnectSocketTimer) {
+- (void)clearReconnectSocketTimer
+{
+    if (_reconnectSocketTimer)
+    {
         [_reconnectSocketTimer invalidate];
         _reconnectSocketTimer = nil;
     }

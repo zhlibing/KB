@@ -215,21 +215,24 @@
     }
     
 }
-//设置
-- (void) settingBtnClick{;
-}
-- (void)loginAction{
-    if (!kLogin) {
-        [self presentLoginController];
-    }
-}
+
+
+
 
 
 
 -(void)promoteBtnAcrion:(UIButton*)sender
 {
-    SY_InviteViewController *invite = [[SY_InviteViewController alloc]init];
-    [self.navigationController pushViewController:invite animated:YES];
+    if (kLogin)
+    {
+        SY_InviteViewController *invite = [[SY_InviteViewController alloc]init];
+        [self.navigationController pushViewController:invite animated:YES];
+    }
+    else
+    {
+        [self presentLoginController];
+    }
+    
 }
 
 

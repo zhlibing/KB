@@ -145,50 +145,55 @@ static NSString * PankouCell = @"PankouCellID";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if (indexPath.section == 0) {
+    if (indexPath.section == 0)
+    {
         Heyue_Pankou_Cell *pankouCell = [tableView dequeueReusableCellWithIdentifier:PankouCell forIndexPath:indexPath];
         pankouCell.priceLabel.textColor = kMarketDown;
         pankouCell.noLabel.text = [NSString stringWithFormat:@"%ld",self.rowNum-indexPath.row];
-        if (self.pankouModel1.asks.count > 0) {
+        if (self.pankouModel1.asks.count > 0)
+        {
             PanKou_Socket_Price_Model * model = [[PanKou_Socket_Price_Model mj_objectArrayWithKeyValuesArray:self.pankouModel1.asks] objectAtIndex:self.rowNum - 1 - indexPath.row];
             
             pankouCell.priceLabel.text = [SSTool MarketPname:self.pankouModel1.code price:model.price];
-            pankouCell.numberLabel.text = [WLTools noroundingStringWith:model.totalSize.doubleValue afterPointNumber:0];
-//            pankouCell.numberLabel.text = [SSTool disposeZeroPname:@"4" price:model.totalSize];
+            pankouCell.numberLabel.text = [WLTools noroundingStringWith:model.totalSize.doubleValue afterPointNumber:4];
         }
         
         pankouCell.bgView.backgroundColor = [kMarketDown colorWithAlphaComponent:0.3];
-        if (indexPath.row < self.rightwidArr.count) {
-            [pankouCell.bgView mas_updateConstraints:^(MASConstraintMaker *make) {
+        if (indexPath.row < self.rightwidArr.count)
+        {
+            [pankouCell.bgView mas_updateConstraints:^(MASConstraintMaker *make)
+            {
                 make.width.equalTo(@([self.rightwidArr[indexPath.row] doubleValue]));
             }];
         }
         
         return pankouCell;
-    }else {
+    }
+    else
+    {
         
         Heyue_Pankou_Cell *pankouCell = [tableView dequeueReusableCellWithIdentifier:PankouCell];
         pankouCell.priceLabel.textColor = kMarketUp;
         pankouCell.noLabel.text = [NSString stringWithFormat:@"%ld",(long)indexPath.row + 1];
-        if (self.pankouModel1.bids.count > 0) {
+        if (self.pankouModel1.bids.count > 0)
+        {
             PanKou_Socket_Price_Model * model = [[PanKou_Socket_Price_Model mj_objectArrayWithKeyValuesArray:self.pankouModel1.bids] objectAtIndex: indexPath.row];
 
             
             pankouCell.priceLabel.text = [SSTool MarketPname:self.pankouModel1.code price:model.price];
-            
-                        pankouCell.numberLabel.text = [WLTools noroundingStringWith:model.totalSize.doubleValue afterPointNumber:0];
-//            pankouCell.numberLabel.text = [SSTool disposeZeroPname:@"4" price:model.totalSize];
+            pankouCell.numberLabel.text = [WLTools noroundingStringWith:model.totalSize.doubleValue afterPointNumber:4];
 
         }
         
         pankouCell.bgView.backgroundColor = [kMarketUp colorWithAlphaComponent:0.3];
 
-        if (indexPath.row < self.widArr.count) {
-            [pankouCell.bgView mas_updateConstraints:^(MASConstraintMaker *make) {
+        if (indexPath.row < self.widArr.count)
+        {
+            [pankouCell.bgView mas_updateConstraints:^(MASConstraintMaker *make)
+            {
                 make.width.equalTo(@([self.widArr[indexPath.row] doubleValue]));
             }];
         }
-        
         return pankouCell;
     }
 }
@@ -210,7 +215,8 @@ static NSString * PankouCell = @"PankouCellID";
     }
 }
 
-- (void)setPankouModel:(PanKou_Socket_Model *)pankouModel{
+- (void)setPankouModel:(PanKou_Socket_Model *)pankouModel
+{
     self.pankouModel1 = pankouModel;
     [self.numberArr removeAllObjects];
     
@@ -220,16 +226,20 @@ static NSString * PankouCell = @"PankouCellID";
     
     [self.rightnumberArr removeAllObjects];
     
-    for (int i = 0 ; i< 7; i++) {
-        if (pankouModel.bids.count <= i) {
+    for (int i = 0 ; i< 7; i++)
+    {
+        if (pankouModel.bids.count <= i)
+        {
             break;
         }
         PanKou_Socket_Price_Model *model = [[PanKou_Socket_Price_Model mj_objectArrayWithKeyValuesArray:pankouModel.bids] objectAtIndex:i];
         [self.numberArr addObject:[NSNumber numberWithFloat:model.totalSize.floatValue]];
     }
     
-    for (int i = 0 ; i< 7; i++) {
-        if (pankouModel.bids.count <= i) {
+    for (int i = 0 ; i< 7; i++)
+    {
+        if (pankouModel.bids.count <= i)
+        {
             break;
         }
         PanKou_Socket_Price_Model *model = [[PanKou_Socket_Price_Model mj_objectArrayWithKeyValuesArray:pankouModel.asks] objectAtIndex:self.rowNum - 1 - i];
@@ -244,7 +254,8 @@ static NSString * PankouCell = @"PankouCellID";
     
     CGFloat maxValue = [[totalArr valueForKeyPath:@"@max.doubleValue"] floatValue];
     
-    for (NSString * numberstr in self.numberArr) {
+    for (NSString * numberstr in self.numberArr)
+    {
         
         CGFloat width = ((ScreenWidth / 2) - ScaleW(30)) * (numberstr.doubleValue / maxValue);
         

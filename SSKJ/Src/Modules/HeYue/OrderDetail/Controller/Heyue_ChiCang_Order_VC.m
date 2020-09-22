@@ -64,9 +64,20 @@ static NSString *ChiCangOrderID = @"ChiCangOrderID";
     [super viewDidLoad];
     self.view.backgroundColor = kBgColor;
 
-    [self tableView];
-    [self allBtn];
+    [self.view addSubview:self.tableView];
+    [self.view addSubview:self.allBtn];
     [self requestChiCangOrder_URL];
+    
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(@(ScaleW(5)));
+        make.left.bottom.right.equalTo(@(ScaleW(0)));
+    }];
+    
+    [self.allBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+       make.right.equalTo(@(ScaleW(-30)));
+       make.bottom.equalTo(@(ScaleW(-100)));
+       make.width.height.equalTo(@(ScaleW(56)));
+    }];
 }
 
 
@@ -100,7 +111,6 @@ static NSString *ChiCangOrderID = @"ChiCangOrderID";
         _tableView.backgroundColor = kBgColor;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScaleW(150))];
-//        _tableView.separatorColor = kLightLineColor;
         if (@available(iOS 11.0, *)){
             _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
             _tableView.estimatedRowHeight = 0;
@@ -111,12 +121,6 @@ static NSString *ChiCangOrderID = @"ChiCangOrderID";
         }
         [_tableView registerClass:[Heyue_ChiCang_Order_Cell class] forCellReuseIdentifier:ChiCangOrderID];
         
-        [self.view addSubview:_tableView];
-        [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(@(ScaleW(5)));
-            make.left.bottom.right.equalTo(@(ScaleW(0)));
-        }];
-        
     }
     return _tableView;
 }
@@ -125,6 +129,8 @@ static NSString *ChiCangOrderID = @"ChiCangOrderID";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    self.allBtn.hidden = ![self.dataSource count];
+    [SSKJ_NoDataView showNoData:self.dataSource.count toView:self.tableView offY:0];
     return self.dataSource.count;
 }
 
@@ -196,10 +202,6 @@ static NSString *ChiCangOrderID = @"ChiCangOrderID";
     [UIView performWithoutAnimation:^{
         [weakSelf.tableView reloadData];
     }];
-    
-    self.allBtn.hidden = !self.dataSource.count;
-    [SSKJ_NoDataView showNoData:self.dataSource.count toView:self.tableView offY:0];
-    
     
     for (Heyue_OrderDdetail_Model *model in self.dataSource) {
         if ([model.ID isEqualToString:self.curredntModel.ID] && self.pingCangAlertView.superview != nil) {
@@ -290,11 +292,14 @@ static NSString *ChiCangOrderID = @"ChiCangOrderID";
 
 
 #pragma mark -- 修改止盈止损 --
-- (HeYue_EditWinLoss_AlertView *)editWinLossAlertView{
-    if (_editWinLossAlertView == nil) {
+- (HeYue_EditWinLoss_AlertView *)editWinLossAlertView
+{
+    if (_editWinLossAlertView == nil)
+    {
         _editWinLossAlertView = [[HeYue_EditWinLoss_AlertView alloc]initWithFrame:self.view.bounds];
         WS(weakSelf);
-        _editWinLossAlertView.EditWinLossBlock = ^(NSString * _Nonnull winstr, NSString * _Nonnull lossStr) {
+        _editWinLossAlertView.EditWinLossBlock = ^(NSString * _Nonnull winstr, NSString * _Nonnull lossStr)
+        {
             [weakSelf requestEditWinLossWithWinStr:winstr lossStr:lossStr];
         };
     }
@@ -326,19 +331,7 @@ static NSString *ChiCangOrderID = @"ChiCangOrderID";
         _allBtn = [WLTools allocButton:nil textColor:nil nom_bg:nil hei_bg:nil frame:CGRectZero];
         _allBtn.cornerRadius = ScaleW(28);
         [_allBtn addTarget:self action:@selector(allAction) forControlEvents:UIControlEventTouchUpInside];
-        
-        
         [_allBtn setBackgroundImage:UIImageNamed(SSKJLanguage(@"hy_pingcang")) forState:UIControlStateNormal];
-        
-        [self.view addSubview:_allBtn];
-        [_allBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(@(ScaleW(-16)));
-            make.bottom.equalTo(@(ScaleW(-53)));
-            make.width.height.equalTo(@(ScaleW(56)));
-            if (Height_NavBar == 88) {
-                make.bottom.equalTo(@(ScaleW(-87)));
-            }
-        }];
     }
     return _allBtn;
 }

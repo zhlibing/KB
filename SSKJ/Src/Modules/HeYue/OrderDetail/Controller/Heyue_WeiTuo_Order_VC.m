@@ -49,10 +49,23 @@ static NSString *WeiTuoOrderID = @"WeiTuoOrderID";
     [super viewDidLoad];
     
     self.view.backgroundColor = kBgColor;
-    [self tableView];
-    
+    [self.view addSubview:self.tableView];
+    [self.view addSubview:self.allBtn];
     [self requestWeiTuoOrder_URL];
-    [self allBtn];
+    
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make)
+    {
+        make.top.equalTo(@(ScaleW(5)));
+        make.left.bottom.right.equalTo(@(ScaleW(0)));
+    }];
+    [self.allBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+       make.right.equalTo(@(ScaleW(-16)));
+       make.bottom.equalTo(@(ScaleW(-100)));
+       make.width.height.equalTo(@(ScaleW(56)));
+        
+    }];
+    
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -84,12 +97,6 @@ static NSString *WeiTuoOrderID = @"WeiTuoOrderID";
     {
         _tableView = [[SSKJ_TableView alloc]initWitDeletage:self];
         [_tableView registerClass:[Heyue_WeiTuo_Order_Cell class] forCellReuseIdentifier:WeiTuoOrderID];
-        [self.view addSubview:_tableView];
-        [_tableView mas_makeConstraints:^(MASConstraintMaker *make)
-        {
-            make.top.equalTo(@(ScaleW(5)));
-            make.left.bottom.right.equalTo(@(ScaleW(0)));
-        }];
     }
     return _tableView;
 }
@@ -98,6 +105,8 @@ static NSString *WeiTuoOrderID = @"WeiTuoOrderID";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    [self.allBtn setHidden:!self.dataSource.count];
+    [SSKJ_NoDataView showNoData:self.dataSource.count toView:self.tableView offY:0];
     return self.dataSource.count;
 }
 
@@ -151,7 +160,6 @@ static NSString *WeiTuoOrderID = @"WeiTuoOrderID";
 {
     NSMutableArray *array = [Heyue_OrderDdetail_Model mj_objectArrayWithKeyValuesArray:net_model.data[@"data"]];
     [self.dataSource setArray:array];
-    [SSKJ_NoDataView showNoData:self.dataSource.count toView:self.tableView offY:0];
     [self.tableView reloadData];
     
 }
@@ -216,13 +224,6 @@ static NSString *WeiTuoOrderID = @"WeiTuoOrderID";
         
         
         [_allBtn setBackgroundImage:UIImageNamed(SSKJLanguage(@"hy_pingcang")) forState:UIControlStateNormal];
-        
-        [self.view addSubview:_allBtn];
-        [_allBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(@(ScaleW(-16)));
-            make.bottom.equalTo(@(ScaleW(-100)));
-            make.width.height.equalTo(@(ScaleW(56)));
-        }];
     }
     return _allBtn;
 }

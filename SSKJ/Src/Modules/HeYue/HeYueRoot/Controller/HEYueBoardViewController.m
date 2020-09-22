@@ -65,14 +65,8 @@
     [self.view addSubview:self.segmentControl];
     [self.view addSubview:self.scrollView];
     
-    WS(weakSelf);
-    [[ProfitWeiTuoChiCangHelper shareHelper] setGetProfitWeiTuoChiCangBlock:^(Heyue_OrderInfo_Model * _Nonnull profitModel, NSArray * _Nonnull weituoArray, NSArray * _Nonnull chicangArray)
-     {
-        
-        [weakSelf.headerView setModel:profitModel];
-        [weakSelf.chiCangVC setItemArry:weituoArray];
-        [weakSelf.heyueVC setItemArray:chicangArray];
-    }];
+    
+   
     
     
 }
@@ -83,7 +77,9 @@
     [super viewWillAppear:animated];
     [self setNavigationBarHidden:NO];
     [self requestGetLeverageURLURL];
+    [self subscriptionProfit];
 }
+
 
 -(void)viewWillDisappear:(BOOL)animated
 {
@@ -91,7 +87,18 @@
 }
 
 
-
+#pragma mark 只要视图进来就订阅
+-(void)subscriptionProfit
+{
+    WS(weakSelf);
+    [[ProfitWeiTuoChiCangHelper shareHelper] setGetProfitWeiTuoChiCangBlock:^(Heyue_OrderInfo_Model * _Nonnull profitModel, NSArray * _Nonnull weituoArray, NSArray * _Nonnull chicangArray)
+    {
+      
+      [weakSelf.headerView setModel:profitModel];
+      [weakSelf.chiCangVC setItemArry:chicangArray];
+      [weakSelf.heyueVC setItemArray:weituoArray];
+    }];
+}
 
 
 

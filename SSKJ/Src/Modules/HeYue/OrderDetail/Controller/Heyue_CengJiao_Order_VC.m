@@ -88,11 +88,13 @@ static NSString *ChengJiaoOrderID = @"ChengJiaoOrderID";
     [self requestChengJiaoOrder_URL];
 }
 
-- (void)beginrefreashData{
+- (void)beginrefreashData
+{
     [self headerRefresh];
 }
 
--(void)endRefresh{
+-(void)endRefresh
+{
     if (self.tableView.mj_header.state == MJRefreshStateRefreshing) {
         [self.tableView.mj_header endRefreshing];
     }

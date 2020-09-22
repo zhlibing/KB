@@ -507,7 +507,7 @@
 		044B420D24285F7D002C771E /* NSTimer+weakTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+weakTimer.m"; sourceTree = "<group>"; };
 		0455BDF12425B71A00EBE580 /* Heyue_OrderDetail_ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Heyue_OrderDetail_ViewController.h; sourceTree = "<group>"; };
 		0455BDF22425B71A00EBE580 /* Heyue_OrderDetail_ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Heyue_OrderDetail_ViewController.m; sourceTree = "<group>"; };
-		06304A9121B907FB00279355 /* KB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KB.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		06304A9121B907FB00279355 /* KB网.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "KB网.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		06304A9421B907FB00279355 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		06304A9521B907FB00279355 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		06304A9B21B907FB00279355 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -1536,7 +1536,7 @@
 		06304A9221B907FB00279355 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				06304A9121B907FB00279355 /* KB.app */,
+				06304A9121B907FB00279355 /* KB网.app */,
 				06304AA921B907FC00279355 /* SSKJTests.xctest */,
 				06304AB421B907FC00279355 /* SSKJUITests.xctest */,
 			);
@@ -3632,7 +3632,7 @@
 			);
 			name = SSKJ;
 			productName = SSKJ;
-			productReference = 06304A9121B907FB00279355 /* KB.app */;
+			productReference = 06304A9121B907FB00279355 /* KB网.app */;
 			productType = "com.apple.product-type.application";
 		};
 		06304AA821B907FC00279355 /* SSKJTests */ = {
@@ -4377,8 +4377,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6D5Q4H7PDR;
+				CURRENT_PROJECT_VERSION = 7;
+				DEVELOPMENT_TEAM = 2VZPDQKTU8;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/SSKJ/Src/Common/PrefixHeader.pch";
 				INFOPLIST_FILE = SSKJ/Root/Info.plist;
@@ -4387,9 +4387,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kb.soft;
-				PRODUCT_NAME = KB;
+				PRODUCT_NAME = "KB网";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SSKJ/Src/Modules/Assets/资产充值/SSKJ-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -4405,7 +4405,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = 2VZPDQKTU8;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/SSKJ/Src/Common/PrefixHeader.pch";
@@ -4415,9 +4415,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kb.soft;
-				PRODUCT_NAME = KB;
+				PRODUCT_NAME = "KB网";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SSKJ/Src/Modules/Assets/资产充值/SSKJ-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;

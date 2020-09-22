@@ -113,9 +113,9 @@
         
         [self.leftCodeImageView mas_makeConstraints:^(MASConstraintMaker *make) {
            
-            make.bottom.equalTo(self.leftImageView.mas_bottom).offset(-40);
+            make.bottom.equalTo(self.leftImageView.mas_bottom).offset(-35);
             make.centerX.equalTo(self.leftImageView.mas_centerX);
-            make.width.height.equalTo(@(60));
+            make.width.height.equalTo(@(50));
             
             
         }];
