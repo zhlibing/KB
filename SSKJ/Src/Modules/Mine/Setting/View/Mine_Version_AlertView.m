@@ -56,7 +56,7 @@
         make.top.mas_equalTo(ScaleW(174));
         make.left.equalTo(self.imageView.mas_centerX).offset(ScaleW(5));
         make.width.mas_equalTo(ScaleW(40));
-        make.height.mas_equalTo(ScaleW(12));
+        make.height.mas_equalTo(ScaleW(15));
     }];
     
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -118,8 +118,9 @@
 
 -(UILabel *)versionLabel
 {
-    if (nil == _versionLabel) {
-        _versionLabel = [WLTools allocLabel:SSKJLocalized(@"",nil) font:systemFont(ScaleW(12)) textColor:kTitleColor frame:CGRectMake(ScaleW(25), ScaleW(174), ScaleW(200), ScaleW(12)) textAlignment:NSTextAlignmentLeft];
+    if (nil == _versionLabel)
+    {
+        _versionLabel = [WLTools allocLabel:SSKJLocalized(@"",nil) font:systemFont(ScaleW(12)) textColor:kTitleColor frame:CGRectMake(ScaleW(25), ScaleW(174), ScaleW(200), ScaleW(12)) textAlignment:NSTextAlignmentCenter];
         _versionLabel.backgroundColor = kBlueColor;
         _versionLabel.layer.cornerRadius = 2.0f;
         _versionLabel.layer.masksToBounds = YES;
