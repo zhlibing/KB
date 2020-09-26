@@ -23,7 +23,8 @@
 @property (nonatomic, strong) UILabel *checkTitleLabel; // 审核时间
 @property (nonatomic, strong) UILabel *checkLabel;
 
-@property (nonatomic, strong) UIView *refuseView;   // 拒绝
+
+
 @property (nonatomic, strong) UIImageView *refuseImageView;
 @property (nonatomic, strong) UILabel *refuseLabel;
 @property (nonatomic, strong) UIView *lineView;
@@ -47,7 +48,6 @@
         [self.backView addSubview:self.addressLabel];
         [self.backView addSubview:self.numberTitleLabel];
         [self.backView addSubview:self.numberLabel];
-        [self.backView addSubview:self.statusLabel];
         [self.backView addSubview:self.feeTitleLabel];
         [self.backView addSubview:self.feeLabel];
         [self.backView addSubview:self.timeTitleLabel];
@@ -55,9 +55,9 @@
         [self.backView addSubview:self.checkTitleLabel];
         [self.backView addSubview:self.checkLabel];
         [self.backView addSubview:self.lineView];
-        [self.backView addSubview:self.refuseView];
-        [self.refuseView addSubview:self.refuseImageView];
-        [self.refuseView addSubview:self.refuseLabel];
+        [self.backView addSubview:self.refuseImageView];
+        [self.backView addSubview:self.statusLabel];
+        [self.backView addSubview:self.refuseLabel];
 
     }
     return self;
@@ -66,7 +66,8 @@
 
 -(UIView *)backView
 {
-    if (nil == _backView) {
+    if (nil == _backView)
+    {
         _backView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth , ScaleW(180))];
         _backView.backgroundColor = kBgColor;
     }
@@ -121,15 +122,7 @@
     return _numberLabel;
 }
 
--(UILabel *)statusLabel
-{
-    if (nil == _statusLabel)
-    {
-        _statusLabel = [WLTools allocLabel:SSKJLocalized(@"提币成功", nil) font:systemFont(ScaleW(14)) textColor:kBlueColor frame:CGRectMake(self.checkTitleLabel.left, self.checkTitleLabel.bottom+ScaleW(13), ScreenWidth-ScaleW(40), ScaleW(20)) textAlignment:NSTextAlignmentLeft];
-        
-    }
-    return _statusLabel;
-}
+
 
 - (UILabel *)feeTitleLabel
 {
@@ -175,7 +168,8 @@
 
 - (UILabel *)checkTitleLabel
 {
-    if (nil == _checkTitleLabel) {
+    if (nil == _checkTitleLabel)
+    {
         _checkTitleLabel = [WLTools allocLabel:SSKJLocalized(@"审核时间", nil) font:systemFont(ScaleW(14)) textColor:kSubTitleColor frame:CGRectMake(ScaleW(15), self.timeTitleLabel.bottom + ScaleW(13), self.numberTitleLabel.width, ScaleW(14)) textAlignment:NSTextAlignmentLeft];
         _checkTitleLabel.adjustsFontSizeToFitWidth = YES;
     }
@@ -192,18 +186,22 @@
     return _checkLabel;
 }
 
--(UIView *)refuseView
+
+-(UILabel *)statusLabel
 {
-    if (nil == _refuseView) {
-        _refuseView = [[UIView alloc]initWithFrame:CGRectMake(0, self.checkTitleLabel.bottom + ScaleW(14), self.backView.width, ScaleW(16.5))];
+    if (nil == _statusLabel)
+    {
+        _statusLabel = [WLTools allocLabel:SSKJLocalized(@"提币成功", nil) font:systemFont(ScaleW(14)) textColor:kBlueColor frame:CGRectMake(self.checkTitleLabel.left, self.checkTitleLabel.bottom+ScaleW(13), 80, ScaleW(20)) textAlignment:NSTextAlignmentLeft];
+        
     }
-    return _refuseView;
+    return _statusLabel;
 }
 
 -(UIImageView *)refuseImageView
 {
-    if (nil == _refuseImageView) {
-        _refuseImageView = [[UIImageView alloc]initWithFrame:CGRectMake(ScaleW(15.5), 0, ScaleW(16.5), ScaleW(16.5))];
+    if (nil == _refuseImageView)
+    {
+        _refuseImageView = [[UIImageView alloc]initWithFrame:CGRectMake(self.checkTitleLabel.left, self.checkTitleLabel.bottom+ScaleW(13),20, 20)];
         _refuseImageView.image = [UIImage imageNamed:@"mine_error"];
     }
     return _refuseImageView;
@@ -211,8 +209,9 @@
 
 -(UILabel *)refuseLabel
 {
-    if (nil == _refuseLabel) {
-        _refuseLabel = [WLTools allocLabel:@"" font:systemFont(ScaleW(13)) textColor:kTitleColor frame:CGRectMake(self.refuseImageView.right + ScaleW(7.5), 0, self.refuseView.width - ScaleW(22.5) - self.refuseImageView.right, self.refuseView.height) textAlignment:NSTextAlignmentLeft];
+    if (nil == _refuseLabel)
+    {
+        _refuseLabel = [WLTools allocLabel:@"" font:systemFont(ScaleW(13)) textColor:kTitleColor frame:CGRectZero textAlignment:NSTextAlignmentLeft];
     }
     return _refuseLabel;
 }
@@ -244,35 +243,45 @@
     }
     
     NSInteger status = model.status.integerValue;
-    
-    if (status == 0 || status == 1) {
+    [self.statusLabel setFrame:CGRectMake(self.checkTitleLabel.left, self.checkTitleLabel.bottom+ScaleW(13), self.statusLabel.width, ScaleW(20))];
+    if (status == 0 || status == 1)
+    {
         self.statusLabel.text = SSKJLocalized(@"审核中", nil);
         self.statusLabel.textColor = UIColorFromRGB(0x2FE091);
-    }else  if (status == 3 || status == 5){
+    }
+    else  if (status == 3 || status == 5)
+    {
         self.statusLabel.text = SSKJLocalized(@"审核失败", nil);
         self.statusLabel.textColor = UIColorFromRGB(0xFF5E66);
-    }else if (status == 4){
+        [self.statusLabel setFrame:CGRectMake((self.refuseImageView.right+5), self.checkTitleLabel.bottom+ScaleW(13), self.statusLabel.width, ScaleW(20))];
+    }
+    else if (status == 4)
+    {
         self.statusLabel.text = SSKJLocalized(@"提币成功", nil);
         self.statusLabel.textColor = kBlueColor;
     }
     
     
-    if (status == 3 || status == 5){
-        self.refuseView.hidden = NO;
+    
+    [self.refuseLabel setFrame:CGRectMake(self.statusLabel.right, self.statusLabel.top,   (ScreenWidth/2.0),ScaleW(20))];
+    if (status == 3 || status == 5)
+    {
+        [self.refuseImageView setHidden:NO];
         self.backView.height = ScaleW(204);
         self.refuseLabel.text = model.refuse_reason;
-    }else{
-        self.refuseView.hidden = YES;
+       
+        NSLog(@"原因:%@",model.refuse_reason);
+        [self.refuseLabel setHidden:NO];
+    }
+    else
+    {
+        
         self.backView.height = ScaleW(174);
-
+        [self.refuseLabel setHidden:YES];
+        [self.refuseImageView setHidden:YES];
     }
     
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
-}
 
 @end
