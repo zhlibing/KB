@@ -89,46 +89,39 @@ static NSString *cellID = @"ExtractRecord_Cell";
 
 
 #pragma mark - UITableViewDelegate,UITableViewDataSource
-
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return self.dataSource.count;
-}
-
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    return [self.dataSource count];
 }
+
+
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ATEX_Extract_IndexModel *model = self.dataSource[indexPath.section];
-    if (model.status.integerValue == 3 || model.status.integerValue == 5)
-    {
-        return ScaleW(204);
-    }
-    else
-    {
-        return ScaleW(185);
-    }
+    return ScaleW(185);
 }
+
 
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ExtractRecord_Cell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-    ATEX_Extract_IndexModel *model = self.dataSource[indexPath.section];
-    [cell setCellWithModel:model];
+    [cell setCellWithModel:[self.dataSource objectAtIndex:indexPath.row]];
     return cell;
 }
 
 #pragma mark - 上拉、下拉
 -(void)headerRefresh
 {
-    if (kLogin) {
+    if (kLogin)
+    {
         self.page = 1;
         [self requestRecordList];
-    }else{
+    }
+    else
+    {
         [self endRefresh];
     }
 }

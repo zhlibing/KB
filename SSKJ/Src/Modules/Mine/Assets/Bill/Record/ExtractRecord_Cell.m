@@ -68,7 +68,7 @@
 {
     if (nil == _backView)
     {
-        _backView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth , ScaleW(180))];
+        _backView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth , ScaleW(185))];
         _backView.backgroundColor = kBgColor;
     }
     return _backView;
@@ -266,17 +266,12 @@
     [self.refuseLabel setFrame:CGRectMake(self.statusLabel.right, self.statusLabel.top,   (ScreenWidth/2.0),ScaleW(20))];
     if (status == 3 || status == 5)
     {
+        [self.refuseLabel setText:model.refuse_reason];
         [self.refuseImageView setHidden:NO];
-        self.backView.height = ScaleW(204);
-        self.refuseLabel.text = model.refuse_reason;
-       
-        NSLog(@"原因:%@",model.refuse_reason);
         [self.refuseLabel setHidden:NO];
     }
     else
     {
-        
-        self.backView.height = ScaleW(174);
         [self.refuseLabel setHidden:YES];
         [self.refuseImageView setHidden:YES];
     }
