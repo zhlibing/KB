@@ -63,6 +63,7 @@
 {
     return self.viewControllers.count > 1;
 }
+
 - (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
     
     if ([navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {

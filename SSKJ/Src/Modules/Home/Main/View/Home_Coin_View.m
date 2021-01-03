@@ -7,7 +7,9 @@
 //
 
 #import "Home_Coin_View.h"
+
 #import "Home_Coin_CollectionViewCell.h"
+
 @interface Home_Coin_View() <UICollectionViewDataSource, UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 
 @property(nonatomic)NSInteger totalNum;

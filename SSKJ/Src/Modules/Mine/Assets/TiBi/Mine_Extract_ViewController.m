@@ -18,6 +18,8 @@
 #import "UITextField+Helper.h"
 #import "LA_Extract_SafeVerify_AlertView.h"
 
+#define NUM @"0123456789"
+
 @interface Mine_Extract_ViewController ()<UITextFieldDelegate>
 
 
@@ -358,6 +360,7 @@
         [_numberTextField setKeyboardType:UIKeyboardTypeNumberPad];
         _numberTextField.delegate = self;
         [_numberTextField addTarget:self action:@selector(inputChanged) forControlEvents:UIControlEventEditingChanged];
+        [_numberTextField setTag:2];
     }
     return _numberTextField;
 }
@@ -648,7 +651,9 @@
 {
     if (textField == self.numberTextField)
     {
-        return [textField textFieldShouldChangeCharactersInRange:range replacementString:string dotNumber:2];
+        NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUM] invertedSet];
+        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+        return [string isEqualToString:filtered];
     }
     else
     {
@@ -657,9 +662,19 @@
 }
 
 
+
+
+
+
+
+
 -(void)inputChanged
 {
     self.numberTextField.text = [self deleteFirstZero:self.numberTextField.text];
+    
+    [self.numberTextField  setText:[NSString stringWithFormat:@"%ld",[self.numberTextField.text integerValue]]];
+    
+    
     
     NSString *shijiString = self.numberTextField.text;
     
@@ -675,7 +690,9 @@
     if (![string hasPrefix:@"0"] || [string isEqualToString:@"0"] || [string hasPrefix:@"0."]) {
         
         return string;
-    }else{
+    }
+    else
+    {
         return [self deleteFirstZero:[string substringFromIndex:1]];
     }
 }

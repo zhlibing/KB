@@ -128,7 +128,8 @@ static void addRoundedRectToPath(CGContextRef context, CGRect rect, float ovalWi
 }
 
 // 加载原始图片
-+ (instancetype)imageWithOriginalName:(NSString *)imageName {
++ (instancetype)imageWithOriginalName:(NSString *)imageName
+{
     UIImage *image = [UIImage imageNamed:imageName];
     
     image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
