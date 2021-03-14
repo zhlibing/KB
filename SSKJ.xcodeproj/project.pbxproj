@@ -453,6 +453,7 @@
 		9689A58524E22C7100E098C9 /* HEYueBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9689A58424E22C7100E098C9 /* HEYueBoardViewController.m */; };
 		9689A58824E2344C00E098C9 /* HEYueBoardHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9689A58724E2344C00E098C9 /* HEYueBoardHeaderView.m */; };
 		968DAACC24DEEAB40038BF8B /* HomeHeaderItemControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 968DAACB24DEEAB40038BF8B /* HomeHeaderItemControl.m */; };
+		96B97D7225BF070D00DC3AA6 /* Launch.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 96B97D7125BF070D00DC3AA6 /* Launch.jpg */; };
 		96BA168624DF9D1B0046EF58 /* AssetsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 96BA168524DF9D1B0046EF58 /* AssetsTableViewCell.m */; };
 		96BA168C24DFA4300046EF58 /* AssetsBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 96BA168A24DFA4300046EF58 /* AssetsBtn.m */; };
 		96C0EC412508649100167BFD /* LJWeakProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 96C0EC402508649000167BFD /* LJWeakProxy.m */; };
@@ -1398,6 +1399,7 @@
 		9689A58724E2344C00E098C9 /* HEYueBoardHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HEYueBoardHeaderView.m; sourceTree = "<group>"; };
 		968DAACA24DEEAB40038BF8B /* HomeHeaderItemControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeHeaderItemControl.h; sourceTree = "<group>"; };
 		968DAACB24DEEAB40038BF8B /* HomeHeaderItemControl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeHeaderItemControl.m; sourceTree = "<group>"; };
+		96B97D7125BF070D00DC3AA6 /* Launch.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Launch.jpg; sourceTree = "<group>"; };
 		96BA168424DF9D1A0046EF58 /* AssetsTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssetsTableViewCell.h; sourceTree = "<group>"; };
 		96BA168524DF9D1B0046EF58 /* AssetsTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AssetsTableViewCell.m; sourceTree = "<group>"; };
 		96BA168A24DFA4300046EF58 /* AssetsBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssetsBtn.m; sourceTree = "<group>"; };
@@ -1583,6 +1585,7 @@
 		06304AF521B9150600279355 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				96B97D7125BF070D00DC3AA6 /* Launch.jpg */,
 				96F790D624E0DF5900386FDB /* 750X1334.gif */,
 				96F790D524E0DF5900386FDB /* 1242X2208.gif */,
 				96F790D724E0DF5A00386FDB /* 1242X2688.gif */,
@@ -3731,6 +3734,7 @@
 				96F790D824E0DF5A00386FDB /* 1242X2208.gif in Resources */,
 				963F510824D59B9C00844D73 /* MJRefresh.bundle in Resources */,
 				43798F0E23A48D6E00A79C36 /* loading.gif in Resources */,
+				96B97D7225BF070D00DC3AA6 /* Launch.jpg in Resources */,
 				06304A9C21B907FB00279355 /* Main.storyboard in Resources */,
 				3A08C33F234C5D380086ED0F /* FRCamrera.bundle in Resources */,
 				96F790DA24E0DF5A00386FDB /* 1242X2688.gif in Resources */,
@@ -4389,7 +4393,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.7;
-				PRODUCT_BUNDLE_IDENTIFIER = com.kb.soft;
+				PRODUCT_BUNDLE_IDENTIFIER = kb.soft;
 				PRODUCT_NAME = "KB网";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SSKJ/Src/Modules/Assets/资产充值/SSKJ-Bridging-Header.h";
@@ -4418,7 +4422,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.7;
-				PRODUCT_BUNDLE_IDENTIFIER = com.kb.soft;
+				PRODUCT_BUNDLE_IDENTIFIER = kb.soft;
 				PRODUCT_NAME = "KB网";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SSKJ/Src/Modules/Assets/资产充值/SSKJ-Bridging-Header.h";

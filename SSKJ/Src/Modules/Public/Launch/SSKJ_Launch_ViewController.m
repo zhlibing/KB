@@ -14,6 +14,7 @@
 
 
 @interface SSKJ_Launch_ViewController ()
+
 @property (nonatomic, strong) YYAnimatedImageView *backImageView;
 
 
@@ -26,14 +27,6 @@
     [super viewDidLoad];
         
     NSString *gifName = @"750X1334";
-    if (kiPhone6Plus)
-    {
-        gifName = @"1242X2208";
-    }
-    else if (IS_IPHONE_X_ALL)
-    {
-        gifName = @"1242X2688";
-    }
     
     NSURL *imgUrl = [[NSBundle mainBundle] URLForResource:gifName withExtension:@"gif"];
     [self.view addSubview:self.backImageView];

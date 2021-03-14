@@ -314,7 +314,6 @@
          [self.logoutAlertView showWithMessage:message];
      }
      */
-    
 }
 
 #pragma mark - 系统自带Get请求接口
